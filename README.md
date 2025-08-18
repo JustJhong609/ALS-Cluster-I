@@ -23,9 +23,13 @@ The project is intended to support learners, teachers, and the community by prov
 
 ## 📂 Project Structure
 ├── index.html # Main entry point
+
 ├── about.html # About ALS Cluster 1
+
 ├── contact.html # Contact page with Google Maps embed
+
 ├── assets/ # Images, styles, and other resources
+
 
 
 
