@@ -1,4 +1,4 @@
-# ALS Cluster 1 – Alternative Learning System 🌍  
+# Bukidnon ALS Cluster 1 – Alternative Learning System 🌍  
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)  
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-2ea44f?logo=github)  
