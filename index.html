@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALS Cluster 1 - Alternative Learning System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <style>
+     /* Custom CSS for elements that need more styling than Tailwind provides */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("alsbac.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .map-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #f9a826;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+
+        
+ </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full bg-blue-900 text-white shadow-lg z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="ALSLOGO.png" alt="DepEd Logo" class="h-12">
+                    <img src="BUKIDNONOLOGO.png" alt="DepEd Logo" class="h-12">
+                    <div>
+                        <h1 class="font-bold text-lg">BUKIDNON ALS CLUSTER I</h1>
+                        <p class="text-xs text-yellow-300">Manolo Fortich, Libona, Baungon, Malitbog</p>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#materials" class="nav-link">Materials</a>
+                    <a href="#forms" class="nav-link">Forms</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+                <a href="#home" class="block py-2 nav-link active">Home</a>
+                <a href="#about" class="block py-2 nav-link">About</a>
+                <a href="#materials" class="block py-2 nav-link">Materials</a>
+                <a href="#forms" class="block py-2 nav-link">Forms</a>
+                <a href="#contact" class="block py-2 nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white pt-24 pb-16 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Bukidnon ALS Cluster 1</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Empowering Lifelong Learners</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#materials" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-6 rounded-full transition-all">
+                    <i class="fas fa-download mr-2"></i>Download Materials
+                </a>
+                <a href="#forms" class="bg-white hover:bg-gray-200 text-blue-900 font-bold py-3 px-6 rounded-full transition-all">
+                    <i class="fas fa-list-alt mr-2"></i>Google Forms
+                </a>
+                <a href="#contact" class="bg-transparent hover:bg-blue-800 text-white font-bold py-3 px-6 border-2 border-white rounded-full transition-all">
+                    <i class="fas fa-envelope mr-2"></i>Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8 text-blue-900">Announcements & Updates</h2>
+            
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-yellow-500 mr-3">
+                        <i class="fas fa-exclamation-circle text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-900">Enrollment Ongoing!</h3>
+                        <p class="text-gray-700">ALS Cluster 1 is now accepting enrollees for SY 2023-2024. Visit our office or fill out the online enrollment form.</p>
+                        <p class="text-sm text-gray-500 mt-1">Posted: June 15, 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-blue-500 mr-3">
+                        <i class="fas fa-calendar-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-900">Community Learning Session</h3>
+                        <p class="text-gray-700">Join our monthly community learning session on July 10, 2023 at Barangay Hall, Manolo Fortich. Topics: Financial Literacy and Basic Computer Skills.</p>
+                        <p class="text-sm text-gray-500 mt-1">Posted: June 5, 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-50 border-l-4 border-green-500 p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 text-green-500 mr-3">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-900">A&E Test Schedule</h3>
+                        <p class="text-gray-700">The next Alternative Learning System Accreditation and Equivalency (A&E) Test will be on August 26, 2023. Deadline for registration is July 31.</p>
+                        <p class="text-sm text-gray-500 mt-1">Posted: May 28, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUKIDNON ALS CLUSTER I</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+
+<!-- About Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-blue-900 mb-2">BUKIDNON ALS CLUSTER I</h1>
+            <p class="text-lg text-gray-600">Manolo Fortich, Libona, Baungon, Malitbog</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h2 class="text-3xl font-bold text-blue-900 mb-6">About Our Cluster</h2>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                The Alternative Learning System (ALS) in Bukidnon Cluster I serves the municipalities of Manolo Fortich, 
+                Libona, Baungon, and Malitbog. Our mission is to provide out-of-school youth and adults with quality 
+                basic education through flexible learning programs.
+            </p>
+            <p class="text-gray-700 leading-relaxed">
+                Our team of dedicated educators and community facilitators work tirelessly to bring education closer to 
+                underserved communities, helping learners achieve their dreams and improve their quality of life.
+            </p>
+        </div>
+
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-900 mb-6">Meet Our Team</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <!-- Team Member 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/60.jpg" alt="Alfredo G. De los Santos" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Alfredo G. De los Santos</h4>
+                <p class="text-red-700 mb-2">EPS II - ALS BUKIDNON</p>
+                <p class="text-gray-600 text-sm mb-4">20 years of ALS teaching experience</p>
+                <div class="mt-3">
+                    <a href="mailto:alfredo.delossantos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Dela Cruz" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Juan Dela Cruz</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:juan.delacruz@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Ana Reyes</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Malitbog I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:ana.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Pedro Bautista" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Pedro Bautista</h4>
+                <p class="text-red-700 mb-2">Community Facilitator</p>
+                <p class="text-gray-600 text-sm mb-4">Outreach and Community Engagement</p>
+                <div class="mt-3">
+                    <a href="mailto:pedro.bautista@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <a href="#full-team" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition-all">
+                <i class="fas fa-users mr-2"></i>View All Cluster I ALS Teachers
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Full Team Section (hidden by default) -->
+<section id="full-team" class="hidden py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2">All Cluster I ALS Teachers</h2>
+            <p class="text-gray-600">Meet our complete team of dedicated educators</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/60.jpg" alt="Alfredo G. De los Santos" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Alfredo G. De los Santos</h4>
+                <p class="text-red-700 mb-2">EPS II - ALS BUKIDNON</p>
+                <p class="text-gray-600 text-sm mb-4">20 years of ALS teaching experience</p>
+                <div class="mt-3">
+                    <a href="mailto:alfredo.delossantos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Dela Cruz" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Juan Dela Cruz</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:juan.delacruz@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Ana Reyes</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Malitbog I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:ana.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Pedro Bautista" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Pedro Bautista</h4>
+                <p class="text-red-700 mb-2">Community Facilitator</p>
+                <p class="text-gray-600 text-sm mb-4">Outreach and Community Engagement</p>
+                <div class="mt-3">
+                    <a href="mailto:pedro.bautista@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Additional Team Members (you can add more as needed) -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Maria Santos" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Maria Santos</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:maria.santos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Carlos Reyes</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Baungon I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="#" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition-all close-team">
+                <i class="fas fa-times mr-2"></i>Close Team View
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const viewAllBtn = document.querySelector('a[href="#full-team"]');
+    const teamSection = document.getElementById('full-team');
+    const closeBtn = document.querySelector('.close-team');
+    
+    viewAllBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        teamSection.classList.remove('hidden');
+        teamSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        teamSection.classList.add('hidden');
+        // Scroll back to the about section
+        document.querySelector('section.py-16.bg-white').scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+
+</body>
+</html>
+     <!-- Materials Section -->
+    <section id="materials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Downloadable Learning Materials</h2>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-6 text-red-700 border-b-2 border-yellow-500 pb-2">Learning Activity Sheets (LAS) - Elementary</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-book text-blue-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 1: Communication Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Develops listening, speaking, reading, and writing skills to communicate effectively.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-red-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-flask text-red-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 2: Scientific Literacy</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Introduces basic science concepts and encourages curiosity and problem-solving.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-calculator text-green-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 3: Mathematical Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Builds numeracy, logical reasoning, and everyday math application.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-briefcase text-yellow-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 4: Life and Career Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Focuses on self-management, social skills, and preparation for simple work tasks.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-users text-purple-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 5: Understanding the Self</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Promotes awareness of self, family, community, and basic citizenship.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-laptop text-indigo-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 6: Digital Citizenship</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Encourages safe, responsible, and effective use of digital tools.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-6 text-red-700 border-b-2 border-yellow-500 pb-2">Learning Activity Sheets (LAS) - Secondary</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-book text-blue-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 1: Communication Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Enhances comprehension, writing, and critical communication skills.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-red-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-flask text-red-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 2: Scientific Literacy</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Explores deeper science concepts, evidence-based reasoning, and environmental awareness.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-calculator text-green-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 3: Mathematical Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Strengthens higher-level numeracy and practical applications of mathematics.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-briefcase text-yellow-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 4: Life and Career Skills</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Prepares learners for work, entrepreneurship, and decision-making.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-users text-purple-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 5: Understanding the Self</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Builds values, cultural awareness, and civic responsibility.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all card-hover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-laptop text-indigo-700 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-900">LS 6: Digital Citizenship</h4>
+                            </div>
+                            <p class="text-gray-600 mb-4">Advances ICT skills, responsible use of technology, and digital literacy.</p>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-red-700 border-b-2 border-yellow-500 pb-2">Basic Literacy Program (BLP) Modules</h3>
+                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden transition-all">
+                    <div class="p-6">
+                        <p class="text-gray-700 mb-4">The BLP is for learners who are non-literate or have very limited literacy and numeracy skills.</p>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-600">
+                            <li>Focus: Reading, writing, and basic math</li>
+                            <li>Daily life skills</li>
+                            <li>Foundation for entering ALS Elementary Level</li>
+                        </ul>
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all text-center">
+                                <i class="fas fa-download mr-2"></i>Module 1
+                            </a>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all text-center">
+                                <i class="fas fa-download mr-2"></i>Module 2
+                            </a>
+                            <a href="https://drive.google.com/" target="_blank" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded transition-all text-center">
+                                <i class="fas fa-download mr-2"></i>Module 3
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALS Passers Section -->
+    <section id="passers" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">ALS Passers by Year</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <p class="text-center text-gray-700 mb-8">Congratulations to our ALS graduates! View the list of passers by year.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Links will be added here when available -->
+                    <div class="text-center py-4">
+                        <p class="text-gray-600">Passer links coming soon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Google Forms Section -->
+    <section id="forms" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Online Forms</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <p class="text-center text-gray-700 mb-8">Access our online forms for enrollment, surveys, and evaluations. Click on any of the buttons below to be directed to the corresponding Google Form.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-blue-500">
+                        <div class="text-blue-500 mb-4">
+                            <i class="fas fa-user-plus text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">ALS Enrollment Form</h3>
+                        <p class="text-gray-600">For new and returning ALS learners</p>
+                    </a>
+                    
+                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-green-500">
+                        <div class="text-green-500 mb-4">
+                            <i class="fas fa-clipboard-check text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Learning Session Evaluation</h3>
+                        <p class="text-gray-600">Feedback for ALS teachers and sessions</p>
+                    </a>
+                    
+                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-yellow-500">
+                        <div class="text-yellow-500 mb-4">
+                            <i class="fas fa-question-circle text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">Needs Assessment Survey</h3>
+                        <p class="text-gray-600">Help us understand community learning needs</p>
+                    </a>
+                    
+                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-red-500">
+                        <div class="text-red-500 mb-4">
+                            <i class="fas fa-graduation-cap text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 mb-2">A&E Test Registration</h3>
+                        <p class="text-gray-600">Register for the Accreditation & Equivalency Test</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Contact ALS Cluster 1</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6 text-red-700">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-blue-500 mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900 mb-1">Office Address</h4>
+                                <p class="text-gray-700">DepEd Division Office - ALS Unit<br>Bukidnon, Manolo Fortich</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-green-500 mr-4 mt-1">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900 mb-1">Phone Numbers</h4>
+                                <p class="text-gray-700">(088) 123-4567 (Office)<br>0912-345-6789 (Globe)<br>0999-876-5432 (Smart)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-red-500 mr-4 mt-1">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900 mb-1">Email Address</h4>
+                                <p class="text-gray-700">als.cluster1@deped.gov.ph<br>alscluster1.bukidnon@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-blue-600 mr-4 mt-1">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900 mb-1">Facebook Page</h4>
+                                <a href="https://facebook.com" target="_blank" class="text-blue-600 hover:text-blue-800">ALS Cluster 1 - DepEd Bukidnon</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-yellow-500 mr-4 mt-1">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-blue-900 mb-1">Office Hours</h4>
+                                <p class="text-gray-700">Monday to Friday<br>8:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6 text-red-700">Send Us a Message</h3>
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-1">Full Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-gray-700 font-medium mb-1">Subject</label>
+                            <select id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select a subject</option>
+                                <option value="enrollment">Enrollment Inquiry</option>
+                                <option value="materials">Learning Materials</option>
+                                <option value="session">Learning Session Schedule</option>
+                                <option value="ae-test">A&E Test</option>
+                                <option value="other">Other Concerns</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <button type="submit" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition-all w-full">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Message
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="form-success" class="hidden mt-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700">
+                        <i class="fas fa-check-circle mr-2"></i> Your message has been submitted successfully!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <img src="ALSLOGO.png" alt="DepEd Logo" class="h-12">
+                        <img src="BUKIDNONOLOGO.png" alt="DepEd Logo" class="h-12">
+                        <div>
+                            <h2 class="font-bold text-lg">ALS Cluster I</h2>
+                            <p class="text-xs text-yellow-300">Manolo Fortich, Libona, Baungon, Malitbog</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">Department of Education - Alternative Learning System</p>
+                    <p class="text-xs text-gray-300">© 2023 ALS Cluster 1. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="hidden fixed bottom-8 right-8 bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all hover:bg-blue-800">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // In a real implementation, you would send the form data to a server
+            // For this demo, we'll just show a success message
+            contactForm.reset();
+            formSuccess.classList.remove('hidden');
+            
+            // Hide the success message after 5 seconds
+            setTimeout(() => {
+                formSuccess.classList.add('hidden');
+            }, 5000);
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
