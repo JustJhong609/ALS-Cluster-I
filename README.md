@@ -1,16 +1,18 @@
-# Bukidnon ALS Cluster 1 – Alternative Learning System 🌍  
+# 🌍 Bukidnon ALS Cluster 1 – Alternative Learning System  
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
-![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-2ea44f?logo=github)
+![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-2ea44f?logo=github)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CDN-38B2AC?logo=tailwind-css&logoColor=white)
 ![Static Website](https://img.shields.io/badge/Type-Static%20Website-blue)
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
+![Contributors](https://img.shields.io/github/contributors/JustJhong609/ALS-Cluster-I)
+![License](https://img.shields.io/github/license/JustJhong609/ALS-Cluster-I)
 
 ---
 
-A static website for **ALS Cluster 1 (Alternative Learning System)**, built with **HTML**, **Tailwind CSS**, and an embedded **Google Maps** location for accessibility.  
+## 🌐 Live Preview  
+📍 [Visit the Website on GitHub Pages](https://justjhong609.github.io/ALS-Cluster-I/)  
 
-The project is intended to support learners, teachers, and the community by providing easy access to **learning resources** and **contact information**.
+*(Vercel deployment planned in the future)*  
 
 ---
 
@@ -18,18 +20,16 @@ The project is intended to support learners, teachers, and the community by prov
 - 📚 **Downloadable Materials** – Direct Google Drive links to ALS learning resources  
 - 🗺 **Google Maps Integration** – Easy navigation to the DepEd Division of Bukidnon  
 - 🎨 **Responsive Design** – Powered by Tailwind CSS  
-- 🚀 **Fast Deployment** – Works on GitHub Pages or Vercel  
+- 🚀 **Fast Deployment** – Works on GitHub Pages and (future) Vercel  
 
 ---
 
 ## 📂 Project Structure
-├── index.html # Main entry point  
-
-├── about.html # About ALS Cluster 1  
-
-├── contact.html # Contact page with Google Maps embed  
-
-├── assets/ # Images, styles, and other resources  
+```bash
+├── index.html        # Main entry point
+├── about.html        # About ALS Cluster 1
+├── contact.html      # Contact page with Google Maps embed
+├── assets/           # Images, styles, and other resources
 
 ---
 
