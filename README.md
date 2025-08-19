@@ -6,6 +6,23 @@
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
 ![Contributors](https://img.shields.io/github/contributors/JustJhong609/ALS-Cluster-I)
 ![License](https://img.shields.io/github/license/JustJhong609/ALS-Cluster-I)
+![Stars](https://img.shields.io/github/stars/JustJhong609/ALS-Cluster-I?style=social)
+![Forks](https://img.shields.io/github/forks/JustJhong609/ALS-Cluster-I?style=social)
+
+---
+
+## 📑 Table of Contents
+- [Live Preview](#-live-preview)
+- [Preview](#️-preview)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Deployment](#-deployment)
+- [Technologies Used](#-technologies-used)
+- [About the Project](#-about-the-project)
+- [Contributing](#-contributing)
+- [Roadmap](#-roadmap)
+- [License](#-license)
+- [Credits & Acknowledgments](#-credits--acknowledgments)
 
 ---
 
@@ -16,11 +33,19 @@
 
 ---
 
+## 🖼️ Preview
+> Here’s a quick look at the project interface:  
+
+![Homepage Screenshot](assets/preview-home.png)  
+*(Replace with actual screenshot or demo GIF)*  
+
+---
+
 ## ✨ Features
-- 📚 **Downloadable Materials** – Direct Google Drive links to ALS learning resources  
-- 🗺 **Google Maps Integration** – Easy navigation to the DepEd Division of Bukidnon  
-- 🎨 **Responsive Design** – Powered by Tailwind CSS  
-- 🚀 **Fast Deployment** – Works on GitHub Pages and (future) Vercel  
+- 📚 **Downloadable Materials** – Learners can easily access ALS modules via Google Drive.  
+- 🗺 **Google Maps Integration** – Locate the DepEd Division of Bukidnon directly from the website.  
+- 🎨 **Responsive Design** – Fully mobile-friendly with Tailwind CSS.  
+- 🚀 **Fast Deployment** – Works seamlessly on GitHub Pages, with future support for Vercel.  
 
 ---
 
