@@ -365,7 +365,7 @@
                 <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
                     <img src="SIRDAVE.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
                 </div>
-                <h4 class="text-xl font-bold text-blue-900 mb-1">MAYLAN DAVE B. LA VICTORIA</h4>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Maylan Dave B. La Victoria</h4>
                 <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich IV</p>
                 <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
                 <div class="mt-3">
@@ -738,64 +738,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Contact ALS Cluster 1</h2>
             
-            <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2">
-                    <h3 class="text-2xl font-bold mb-6 text-red-700">Contact Information</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="text-blue-500 mr-4 mt-1">
-                                <i class="fas fa-map-marker-alt text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-blue-900 mb-1">Office Address</h4>
-                                <p class="text-gray-700">DepEd Division Office - ALS Unit<br>Bukidnon, Manolo Fortich</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-green-500 mr-4 mt-1">
-                                <i class="fas fa-phone-alt text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-blue-900 mb-1">Phone Numbers</h4>
-                                <p class="text-gray-700">(088) 123-4567 (Office)<br>0912-345-6789 (Globe)<br>0999-876-5432 (Smart)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-red-500 mr-4 mt-1">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-blue-900 mb-1">Email Address</h4>
-                                <p class="text-gray-700">als.cluster1@deped.gov.ph<br>alscluster1.bukidnon@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-blue-600 mr-4 mt-1">
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-blue-900 mb-1">Facebook Page</h4>
-                                <a href="https://facebook.com" target="_blank" class="text-blue-600 hover:text-blue-800">ALS Cluster 1 - DepEd Bukidnon</a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-yellow-500 mr-4 mt-1">
-                                <i class="fas fa-clock text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-blue-900 mb-1">Office Hours</h4>
-                                <p class="text-gray-700">Monday to Friday<br>8:00 AM - 5:00 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="lg:w-1/2">
+                <div class="lg:w-full">
                     <h3 class="text-2xl font-bold mb-6 text-red-700">Send Us a Message</h3>
                     <form id="contact-form" class="space-y-4">
                         <div>
@@ -840,24 +783,67 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </section>
 
-    <!-- Footer -->
+  <!-- Footer -->
     <footer class="bg-blue-900 text-white py-8">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center space-x-2">
-                        <img src="ALSLOGO.png" alt="DepEd Logo" class="h-12">
-                        <img src="BUKIDNONOLOGO.png" alt="DepEd Logo" class="h-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Column -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <div class="space-y-3 text-sm">
+                        <p>
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <a href="https://maps.google.com/?q=DepEd+Division+Office+-+ALS+Unit+Bukidnon,+Manolo+Fortich" target="_blank" class="hover:text-yellow-300 transition-colors">
+                                DepEd Division Office - ALS Unit Bukidnon, Manolo Fortich
+                            </a>
+                        </p>
+                        
                         <div>
-                            <h2 class="font-bold text-lg">ALS Cluster I</h2>
-                            <p class="text-xs text-yellow-300">Manolo Fortich, Libona, Baungon, Malitbog</p>
+                            <p class="flex items-center"><i class="fas fa-phone-alt mr-2"></i>Phone Numbers</p>
+                            <p class="ml-6">
+                                <a href="tel:0881234567" class="hover:text-yellow-300 transition-colors block">Office: (088) 123-4567</a>
+                                <a href="tel:09123456789" class="hover:text-yellow-300 transition-colors block">Globe: 0912-345-6789</a>
+                                <a href="tel:09998765432" class="hover:text-yellow-300 transition-colors block">Smart: 0999-876-5432</a>
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <p class="flex items-center"><i class="fas fa-envelope mr-2"></i>Email Addresses</p>
+                            <p class="ml-6">
+                                <a href="mailto:als.cluster1@deped.gov.ph" class="hover:text-yellow-300 transition-colors block">als.cluster1@deped.gov.ph</a>
+                                <a href="mailto:alscluster1.bukidnon@gmail.com" class="hover:text-yellow-300 transition-colors block">alscluster1.bukidnon@gmail.com</a>
+                            </p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="text-center md:text-right">
-                    <p class="text-sm mb-2">Department of Education - Alternative Learning System</p>
-                    <p class="text-xs text-gray-300">© 2023 ALS Cluster 1. All rights reserved.</p>
+                <!-- Connect Column -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect</h3>
+                    <div class="space-y-3 text-sm">
+                        <p>
+                            <i class="fab fa-facebook-f mr-2"></i>
+                            <a href="https://facebook.com" target="_blank" class="hover:text-yellow-300 transition-colors">
+                                ALS Cluster 1 - DepEd Bukidnon
+                            </a>
+                        </p>
+                        <div>
+                            <p class="flex items-center"><i class="fas fa-clock mr-2"></i>Office Hours</p>
+                            <p class="ml-6">Monday to Friday<br>8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Column -->
+                <div class="md:text-left">
+                    <h3 class="text-xl font-bold mb-4">Info</h3>
+                    <div class="space-y-3 text-sm">
+                        <p>Department of Education - Alternative Learning System</p>
+                        <p class="text-xs text-gray-300">© 2025 ALS Cluster 1. All rights reserved.</p>
+                        <p class="text-xs text-gray-300">
+                            Website created by <a href="https://github.com" target="_blank" class="text-yellow-300 hover:text-yellow-500 transition-colors">GitHub Contributor</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
