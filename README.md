@@ -25,7 +25,7 @@
 ---
 
 ## 📂 Project Structure
-```bash
+
 ├── index.html        # Main entry point
 ├── about.html        # About ALS Cluster 1
 ├── contact.html      # Contact page with Google Maps embed
