@@ -64,6 +64,14 @@ This project is for educational purposes. Feel free to fork, modify, and improve
 
 ---
 
-## 🙌 Credits
-- 👨‍💻 **Developer**: [Jhong](https://github.com/JustJhong609)  
-- 📝 **Layout, Content, and Ideas**: Alfredo G. De los Santos – EPS II, Division of Bukidnon  
+---
+
+## 🙏 Credits & Acknowledgments  
+
+This project was made possible through the collaboration and contributions of dedicated individuals:  
+
+- **Developer:** [Jhong](https://github.com/JustJhong609) – for building, maintaining, and deploying the website.  
+- **Alfredo G. De los Santos, EPS II, Division of Bukidnon** – for providing the **layout structure, content, and valuable ideas** that guided the overall direction of the project.  
+
+We extend our sincere appreciation to all contributors whose efforts and insights have significantly shaped this project in support of the **Alternative Learning System (ALS) in Bukidnon**.  
+
