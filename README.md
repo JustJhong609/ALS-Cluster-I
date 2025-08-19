@@ -23,16 +23,13 @@ The project is intended to support learners, teachers, and the community by prov
 ---
 
 ## 📂 Project Structure
-├── index.html # Main entry point
+├── index.html # Main entry point  
 
-├── about.html # About ALS Cluster 1
+├── about.html # About ALS Cluster 1  
 
-├── contact.html # Contact page with Google Maps embed
+├── contact.html # Contact page with Google Maps embed  
 
-├── assets/ # Images, styles, and other resources
-
-
-
+├── assets/ # Images, styles, and other resources  
 
 ---
 
@@ -63,4 +60,10 @@ It aligns with the mission of **DepEd Division of Bukidnon** to provide **inclus
 ---
 
 ## 📜 License
-This project is for educational purposes. Feel free to fork, modify, and improve it!
+This project is for educational purposes. Feel free to fork, modify, and improve it!  
+
+---
+
+## 🙌 Credits
+- 👨‍💻 **Developer**: [Jhong](https://github.com/JustJhong609)  
+- 📝 **Layout, Content, and Ideas**: Alfredo G. De los Santos – EPS II, Division of Bukidnon  
