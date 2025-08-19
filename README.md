@@ -6,8 +6,6 @@
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
 ![Contributors](https://img.shields.io/github/contributors/JustJhong609/ALS-Cluster-I)
 ![License](https://img.shields.io/github/license/JustJhong609/ALS-Cluster-I)
-![Stars](https://img.shields.io/github/stars/JustJhong609/ALS-Cluster-I?style=social)
-![Forks](https://img.shields.io/github/forks/JustJhong609/ALS-Cluster-I?style=social)
 
 ---
 
