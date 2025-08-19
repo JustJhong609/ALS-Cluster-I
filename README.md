@@ -3,7 +3,8 @@
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)   
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-2ea44f?logo=github)  
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CDN-38B2AC?logo=tailwind-css&logoColor=white)  
-![Static Website](https://img.shields.io/badge/Type-Static%20Website-blue)  
+![Static Website](https://img.shields.io/badge/Type-Static%20Website-blue)
+![Status](https://img.shields.io/badge/Status-In%20Development-orange) 
 
 ---
 
