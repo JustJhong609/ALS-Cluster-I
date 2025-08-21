@@ -89,12 +89,16 @@ This project is for educational purposes. Feel free to fork, modify, and improve
 
 ---
 
-## 🙏 Credits & Acknowledgments  
+## 🙏 Credits & Acknowledgments
 
-This project was made possible through the collaboration and contributions of dedicated individuals:  
+This project was made possible through the collaboration, dedication, and support of individuals committed to advancing the goals of the **Alternative Learning System (ALS)** in Bukidnon.
 
-- **Developer:** [Jhong](https://github.com/JustJhong609) – for building, maintaining, and deploying the website.  
-- **Alfredo G. De los Santos, EPS II, Division of Bukidnon** – for providing the **layout structure, content, and valuable ideas** that guided the overall direction of the project.  
+- **Developer: [Jhong](https://github.com/JustJhong609)**  
+  For the development, maintenance, and deployment of the website, ensuring its functionality and accessibility for users.
 
-We extend our sincere appreciation to all contributors whose efforts and insights have significantly shaped this project in support of the **Alternative Learning System (ALS) in Bukidnon**.  
+- **Alfredo G. De los Santos, EPS II, Division of Bukidnon**  
+  For providing the comprehensive learning modules, downloadable materials, assets, layout framework, and valuable content that shaped the structure and direction of the platform.
+
+We extend our sincere gratitude to all contributors whose time, expertise, and insights have played a vital role in bringing this project to life in support of inclusive education through ALS.
+
 
