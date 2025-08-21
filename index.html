@@ -696,45 +696,93 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         </div>
     </section>
-    <!-- Google Forms Section -->
-    <section id="forms" class="py-16 bg-gray-100">
+   <!-- Forms Section -->
+    <section id="forms" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-blue-900">Online Forms</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-800">Forms & Documents</h2>
             
-            <div class="max-w-3xl mx-auto">
-                <p class="text-center text-gray-700 mb-8">Access our online forms for enrollment, surveys, and evaluations. Click on any of the buttons below to be directed to the corresponding Google Form.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Enrollment Form -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-800">Enrollment Form</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Form for new learners to enroll in the ALS program.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-blue-500">
-                        <div class="text-blue-500 mb-4">
-                            <i class="fas fa-user-plus text-4xl"></i>
+                <!-- Accreditation Form -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-certificate text-green-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">ALS Enrollment Form</h3>
-                        <p class="text-gray-600">For new and returning ALS learners</p>
+                        <h3 class="text-xl font-bold text-green-800">Accreditation Form</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Form for prior learning recognition and accreditation.</p>
+                    <a href="#" class="text-green-600 hover:text-green-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
                     </a>
-                    
-                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-green-500">
-                        <div class="text-green-500 mb-4">
-                            <i class="fas fa-clipboard-check text-4xl"></i>
+                </div>
+                
+                <!-- A&E Test Application -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-clipboard-check text-purple-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Learning Session Evaluation</h3>
-                        <p class="text-gray-600">Feedback for ALS teachers and sessions</p>
+                        <h3 class="text-xl font-bold text-purple-800">A&E Test Application</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Application form for the Accreditation & Equivalency Test.</p>
+                    <a href="#" class="text-purple-600 hover:text-purple-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
                     </a>
-                    
-                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-yellow-500">
-                        <div class="text-yellow-500 mb-4">
-                            <i class="fas fa-question-circle text-4xl"></i>
+                </div>
+                
+                <!-- Learning Agreement -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-handshake text-yellow-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">Needs Assessment Survey</h3>
-                        <p class="text-gray-600">Help us understand community learning needs</p>
+                        <h3 class="text-xl font-bold text-yellow-800">Learning Agreement</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Agreement between learner and instructional manager.</p>
+                    <a href="#" class="text-yellow-600 hover:text-yellow-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
                     </a>
-                    
-                    <a href="https://forms.google.com/" target="_blank" class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg border-l-4 border-red-500">
-                        <div class="text-red-500 mb-4">
-                            <i class="fas fa-graduation-cap text-4xl"></i>
+                </div>
+                
+                <!-- Progress Report -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-red-600 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-blue-900 mb-2">A&E Test Registration</h3>
-                        <p class="text-gray-600">Register for the Accreditation & Equivalency Test</p>
+                        <h3 class="text-xl font-bold text-red-800">Progress Report</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Form to track and report learner progress.</p>
+                    <a href="#" class="text-red-600 hover:text-red-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feedback Form -->
+                <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-400 transition">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-comment-dots text-indigo-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-indigo-800">Feedback Form</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Form for learners to provide feedback about the program.</p>
+                    <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        Download <i class="fas fa-download ml-2"></i>
                     </a>
                 </div>
             </div>
