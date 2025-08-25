@@ -106,7 +106,7 @@ This project was made possible through the collaboration, dedication, and suppor
 - **Developer: [Jhong](https://github.com/JustJhong609)**  
   For the development, maintenance, and deployment of the website, ensuring its functionality and accessibility for users.
 
-- **Alfredo G. De los Santos, EPS II, Division of Bukidnon**  
+- **Alfredo G. De los Santos Jr., EPS II, Division of Bukidnon**  
   For providing the comprehensive learning modules, downloadable materials, assets, layout framework, and valuable content that shaped the structure and direction of the platform.
 
 We extend our sincere gratitude to all contributors whose time, expertise, and insights have played a vital role in bringing this project to life in support of inclusive education through ALS.
