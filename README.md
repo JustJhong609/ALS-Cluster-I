@@ -82,8 +82,18 @@ It aligns with the mission of **DepEd Division of Bukidnon** to provide **inclus
 
 ---
 
-## 📜 License
-This project is for educational purposes. Feel free to fork, modify, and improve it!  
+## License & Usage
+
+This project is **not open-source**.
+
+Use, distribution, or modification of this code is **not permitted without explicit written permission** from the author.
+
+- Academic or research use may be granted **with permission and proper attribution**.
+- **Commercial use is strictly prohibited** unless licensed separately.
+
+For inquiries or permission requests, please contact:  
+📧 **[20211199@nbsc.edu.ph]**
+
 
 ---
 
