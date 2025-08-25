@@ -5,7 +5,7 @@
 ![Static Website](https://img.shields.io/badge/Type-Static%20Website-blue)
 ![Status](https://img.shields.io/badge/Status-In%20Development-orange)
 ![Contributors](https://img.shields.io/github/contributors/JustJhong609/ALS-Cluster-I)
-![License](https://img.shields.io/github/license/JustJhong609/ALS-Cluster-I)
+
 
 ---
 
