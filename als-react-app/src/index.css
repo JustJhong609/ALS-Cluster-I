@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom ALS styles */
+@layer components {
+  .hero-bg {
+    @apply bg-gradient-to-b from-black/50 to-black/50;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/alsbac.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .nav-link {
+    @apply relative transition-all duration-300;
+  }
+  
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-als-yellow-500 transition-all duration-300;
+    content: '';
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-als-yellow-500 hover:bg-als-yellow-600 text-als-blue-900 font-bold py-3 px-6 rounded-full transition-all duration-300;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-100 text-als-blue-900 font-bold py-3 px-6 rounded-full transition-all duration-300;
+  }
+  
+  .btn-outline {
+    @apply bg-transparent hover:bg-als-blue-800 text-white font-bold py-3 px-6 border-2 border-white rounded-full transition-all duration-300;
+  }
+}
