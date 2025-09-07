@@ -10,7 +10,7 @@
 ---
 
 ## 📑 Table of Contents
-- [Live Preview](#-live-preview)
+- [Live Preview](#-live-preview) 
 - [Preview](#️-preview)
 - [Features](#-features)
 - [Project Structure](#-project-structure)
