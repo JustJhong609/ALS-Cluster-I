@@ -42,7 +42,7 @@
 ## ✨ Features
 - 📚 **Downloadable Materials** – Learners can easily access ALS modules via Google Drive.  
 - 🗺 **Google Maps Integration** – Locate the DepEd Division of Bukidnon directly from the website.  
-- 🎨 **Responsive Design** – Fully mobile-friendly with Tailwind CSS.  
+- 🎨 **Responsive Design** – Fully mobile-friendly with Tailwind CSS. 
 - 🚀 **Fast Deployment** – Works seamlessly on GitHub Pages, with future support for Vercel.  
 
 ---
