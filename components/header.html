@@ -19,12 +19,31 @@
             </div>
             
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6">
+            <div class="hidden md:flex space-x-6 items-center">
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#materials" class="nav-link">Materials</a>
                 <a href="#forms" class="nav-link">Forms</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                
+                <!-- Authentication Buttons -->
+                <div class="ml-4 flex items-center space-x-3">
+                    <!-- Login Button (shown when logged out) -->
+                    <button id="headerLoginBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i class="fas fa-sign-in-alt mr-1"></i>Login
+                    </button>
+                    
+                    <!-- User Info & Logout (shown when logged in) -->
+                    <div id="headerUserInfo" class="hidden flex items-center space-x-3">
+                        <div class="text-right">
+                            <div class="text-sm text-yellow-300">Welcome,</div>
+                            <div id="headerUserEmail" class="text-sm font-medium"></div>
+                        </div>
+                        <button id="headerLogoutBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -35,6 +54,25 @@
             <a href="#materials" class="block py-2 nav-link">Materials</a>
             <a href="#forms" class="block py-2 nav-link">Forms</a>
             <a href="#contact" class="block py-2 nav-link">Contact</a>
+            
+            <!-- Mobile Authentication Buttons -->
+            <div class="border-t border-blue-800 mt-3 pt-3">
+                <!-- Mobile Login Button (shown when logged out) -->
+                <button id="mobileLoginBtn" class="w-full bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors mb-2">
+                    <i class="fas fa-sign-in-alt mr-1"></i>Login
+                </button>
+                
+                <!-- Mobile User Info & Logout (shown when logged in) -->
+                <div id="mobileUserInfo" class="hidden">
+                    <div class="text-center mb-2">
+                        <div class="text-sm text-yellow-300">Welcome,</div>
+                        <div id="mobileUserEmail" class="text-sm font-medium"></div>
+                    </div>
+                    <button id="mobileLogoutBtn" class="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

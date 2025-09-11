@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALS Cluster 1 - Alternative Learning System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
  <style>
      /* Custom CSS for elements that need more styling than Tailwind provides */
         .hero-bg {
@@ -89,12 +91,31 @@
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-6">
+                <div class="hidden md:flex space-x-6 items-center">
                     <a href="#home" class="nav-link active">Home</a>
                     <a href="#about" class="nav-link">About</a>
                     <a href="#materials" class="nav-link">Materials</a>
                     <a href="#forms" class="nav-link">Forms</a>
                     <a href="#contact" class="nav-link">Contact</a>
+                    
+                    <!-- Authentication Buttons -->
+                    <div class="ml-4 flex items-center space-x-3">
+                        <!-- Login Button (shown when logged out) -->
+                        <button id="headerLoginBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-sign-in-alt mr-1"></i>Login
+                        </button>
+                        
+                        <!-- User Info & Logout (shown when logged in) -->
+                        <div id="headerUserInfo" class="hidden flex items-center space-x-3">
+                            <div class="text-right">
+                                <div class="text-sm text-yellow-300">Welcome,</div>
+                                <div id="headerUserEmail" class="text-sm font-medium"></div>
+                            </div>
+                            <button id="headerLogoutBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                                <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -105,6 +126,25 @@
                 <a href="#materials" class="block py-2 nav-link">Materials</a>
                 <a href="#forms" class="block py-2 nav-link">Forms</a>
                 <a href="#contact" class="block py-2 nav-link">Contact</a>
+                
+                <!-- Mobile Authentication Buttons -->
+                <div class="border-t border-blue-800 mt-3 pt-3">
+                    <!-- Mobile Login Button (shown when logged out) -->
+                    <button id="mobileLoginBtn" class="w-full bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors mb-2">
+                        <i class="fas fa-sign-in-alt mr-1"></i>Login
+                    </button>
+                    
+                    <!-- Mobile User Info & Logout (shown when logged in) -->
+                    <div id="mobileUserInfo" class="hidden">
+                        <div class="text-center mb-2">
+                            <div class="text-sm text-yellow-300">Welcome,</div>
+                            <div id="mobileUserEmail" class="text-sm font-medium"></div>
+                        </div>
+                        <button id="mobileLogoutBtn" class="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -1064,8 +1104,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="contactEmail" class="block text-gray-700 font-medium mb-1">Email Address</label>
+                            <input type="email" id="contactEmail" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         
                         <div>
@@ -1300,4 +1340,90 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     </script>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
+            <!-- Close Button -->
+            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Modal Header -->
+            <div class="text-center mb-6">
+                <div class="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-lock text-blue-600 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Access Required</h2>
+                <p class="text-gray-600">Please sign in to download learning materials</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter your email"
+                    >
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter your password"
+                    >
+                </div>
+
+                <button 
+                    type="submit" 
+                    id="loginButton"
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200"
+                >
+                    <span id="loginButtonText">Sign In</span>
+                    <i id="loginSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                </button>
+            </form>
+
+            <!-- Error Message -->
+            <div id="loginError" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded hidden">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span id="loginErrorText">Invalid email or password. Please try again.</span>
+            </div>
+
+            <!-- Success Message -->
+            <div id="loginSuccess" class="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded hidden">
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>Login successful! Starting download...</span>
+            </div>
+
+            <!-- Contact Admin -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-2">Don't have an account?</p>
+                    <p class="text-sm text-gray-800 font-medium mb-2">Contact Administrator:</p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="mailto:als.bukidnon@deped.gov.ph" class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="fas fa-envelope mr-2"></i>als.bukidnon@deped.gov.ph
+                        </a>
+                        <a href="tel:(088) 813-5665" class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="fas fa-phone mr-2"></i>(088) 813-5665
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Script -->
+    <script src="scripts/auth.js"></script>
 </body>
