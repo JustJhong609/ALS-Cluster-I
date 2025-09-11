@@ -109,4 +109,36 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('section.py-16.bg-white').scrollIntoView({ behavior: 'smooth' });
         });
     }
+
+    // Accordion functionality for municipality team list
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const municipality = this.getAttribute('data-municipality');
+            const content = this.nextElementSibling;
+            const arrow = this.querySelector('.accordion-arrow');
+            const isOpen = !content.classList.contains('hidden');
+            
+            // Close all other accordions (single-open behavior)
+            accordionHeaders.forEach(otherHeader => {
+                const otherContent = otherHeader.nextElementSibling;
+                const otherArrow = otherHeader.querySelector('.accordion-arrow');
+                
+                if (otherHeader !== this) {
+                    otherContent.classList.add('hidden');
+                    otherArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current accordion
+            if (isOpen) {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
 });
