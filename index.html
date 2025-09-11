@@ -213,7 +213,7 @@
     <main class="container mx-auto px-4 py-12 mt-200" id="about">
 
 <section class="mb-16">
-  <div class="text-center max-w-4xl mx-auto">
+  <div class="text-center max-w-4xl mx-auto mb-8">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">What is Alternative Learning System (ALS)?</h2>
     <p class="text-lg text-gray-600 leading-relaxed mb-6">
       The Alternative Learning System (ALS) is a parallel learning system in the Philippines that provides a practical option to the existing formal instruction. 
@@ -222,42 +222,76 @@
     </p>
   </div>
 
-  <!-- Extra Info (Why, Basis, How, Difference) -->
-  <div class="max-w-5xl mx-auto space-y-8 text-gray-700 leading-relaxed">
-    <div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">Why is there a need for ALS?</h3>
-      <p>
-        Many Filipinos do not have a chance to attend and finish formal basic education (Grades 1-6 and Years 1-4) due to various reasons. 
-        Some drop out of school while others live in communities without schools. 
-        Since every Filipino has a right to free basic education, the Government established ALS to provide all Filipinos with the chance to access and complete basic education in a way that fits their distinct situations and needs.
-      </p>
-    </div>
+  <!-- ALS Information Accordion -->
+  <div class="max-w-5xl mx-auto">
+    <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+      <!-- Why is there a need for ALS? -->
+      <div class="border-b border-gray-200 last:border-b-0">
+        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="why">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-gray-800">Why is there a need for ALS?</h3>
+            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
+          </div>
+        </button>
+        <div class="accordion-content px-6 pb-4 hidden">
+          <p class="text-gray-700 leading-relaxed">
+            Many Filipinos do not have a chance to attend and finish formal basic education (Grades 1-6 and Years 1-4) due to various reasons. 
+            Some drop out of school while others live in communities without schools. 
+            Since every Filipino has a right to free basic education, the Government established ALS to provide all Filipinos with the chance to access and complete basic education in a way that fits their distinct situations and needs.
+          </p>
+        </div>
+      </div>
 
-    <div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">What is the basis of ALS implementation?</h3>
-      <p>
-        The 1987 Philippine Constitution recognizes and promotes other forms of education beyond formal schooling. 
-        Article XIV, Section 2, Paragraph (1) mandates the State to establish a complete, adequate, and integrated system of education relevant to the needs of the people and society. 
-        Paragraph (4) also encourages non-formal, informal, and indigenous learning systems, including self-learning and out-of-school study programs.  
-        Furthermore, Republic Act 9155 (The Governance Act for Basic Education) stipulates the establishment of ALS to provide basic education to out-of-school children, youth, and adults.
-      </p>
-    </div>
+      <!-- What is the basis of ALS implementation? -->
+      <div class="border-b border-gray-200 last:border-b-0">
+        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="basis">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-gray-800">What is the basis of ALS implementation?</h3>
+            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
+          </div>
+        </button>
+        <div class="accordion-content px-6 pb-4 hidden">
+          <p class="text-gray-700 leading-relaxed">
+            The 1987 Philippine Constitution recognizes and promotes other forms of education beyond formal schooling. 
+            Article XIV, Section 2, Paragraph (1) mandates the State to establish a complete, adequate, and integrated system of education relevant to the needs of the people and society. 
+            Paragraph (4) also encourages non-formal, informal, and indigenous learning systems, including self-learning and out-of-school study programs.  
+            Furthermore, Republic Act 9155 (The Governance Act for Basic Education) stipulates the establishment of ALS to provide basic education to out-of-school children, youth, and adults.
+          </p>
+        </div>
+      </div>
 
-    <div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">How does ALS work?</h3>
-      <p>
-        ALS is implemented through two major programs: the Basic Literacy Program and the Continuing Education Program – Accreditation and Equivalency (A&E).  
-        Both programs are modular and flexible, meaning that learning can take place anytime and anywhere, depending on the convenience and availability of learners.
-      </p>
-    </div>
+      <!-- How does ALS work? -->
+      <div class="border-b border-gray-200 last:border-b-0">
+        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="how">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-gray-800">How does ALS work?</h3>
+            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
+          </div>
+        </button>
+        <div class="accordion-content px-6 pb-4 hidden">
+          <p class="text-gray-700 leading-relaxed">
+            ALS is implemented through two major programs: the Basic Literacy Program and the Continuing Education Program – Accreditation and Equivalency (A&E).  
+            Both programs are modular and flexible, meaning that learning can take place anytime and anywhere, depending on the convenience and availability of learners.
+          </p>
+        </div>
+      </div>
 
-    <div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-2">What is the difference between Formal Education and ALS?</h3>
-      <p>
-        The Formal Education system is classroom-based and managed by trained teachers in schools.  
-        In contrast, ALS is non-formal and community-based, conducted in learning centers, barangay halls, libraries, or even homes.  
-        It is facilitated by ALS learning facilitators such as mobile teachers, district ALS coordinators, or instructional managers, at flexible schedules agreed upon by learners and facilitators.
-      </p>
+      <!-- What is the difference between Formal Education and ALS? -->
+      <div class="border-b border-gray-200 last:border-b-0">
+        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="difference">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-gray-800">What is the difference between Formal Education and ALS?</h3>
+            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
+          </div>
+        </button>
+        <div class="accordion-content px-6 pb-4 hidden">
+          <p class="text-gray-700 leading-relaxed">
+            The Formal Education system is classroom-based and managed by trained teachers in schools.  
+            In contrast, ALS is non-formal and community-based, conducted in learning centers, barangay halls, libraries, or even homes.  
+            It is facilitated by ALS learning facilitators such as mobile teachers, district ALS coordinators, or instructional managers, at flexible schedules agreed upon by learners and facilitators.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -346,7 +380,7 @@
                         </div>
                     </button>
                     <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 gap-4 pt-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                             <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
                                     <img src="maamkai.jpg" alt="Kathlea Kristine C. De los Santos" class="w-full h-full object-cover object-center">
@@ -435,7 +469,7 @@
                         </div>
                     </button>
                     <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 gap-4 pt-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                             <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
                                     <img src="MaamCath.jpg" alt="Cathlyn Mae Hatulan" class="w-full h-full object-cover object-center">
@@ -506,7 +540,7 @@
                         </div>
                     </button>
                     <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 gap-4 pt-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                             <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-purple-50 transition-colors">
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 flex-shrink-0">
                                     <img src="maamShahanie.jpg" alt="Shahanie Magdale Galarpe" class="w-full h-full object-cover object-center">
@@ -559,7 +593,7 @@
                         </div>
                     </button>
                     <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 gap-4 pt-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                             <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-orange-50 transition-colors">
                                 <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0">
                                     <img src="sirtonmalitbog.jpg" alt="Rey Anthony Dalugdug" class="w-full h-full object-cover object-center">
