@@ -6,6 +6,16 @@ class SupabaseAuth {
         this.supabase = null;
         this.currentUser = null;
         this.pendingDownloadUrl = null;
+        this.fallbackMode = false;
+        
+        // Predefined district credentials for fallback authentication
+        this.districtCredentials = {
+            'ManoloDistrict@gmail.com': 'ManoloDistrict12345',
+            'MalitbogDistrict@gmail.com': 'MalitbogDistrict12345',
+            'LibonaDistrict@gmail.com': 'LibonaDistrict12345',
+            'BaungonDistrict@gmail.com': 'BaungonDistrict12345'
+        };
+        
         this.init();
     }
 
@@ -19,27 +29,68 @@ class SupabaseAuth {
             // Initialize Supabase client
             this.supabase = supabase.createClient(this.supabaseUrl, this.supabaseKey);
             
-            // Check if user is already logged in
-            const { data: { session } } = await this.supabase.auth.getSession();
-            if (session?.user) {
-                this.currentUser = session.user;
-                this.updateUIForLoggedInUser();
-            }
-
-            // Listen for auth changes
-            this.supabase.auth.onAuthStateChange((event, session) => {
-                if (event === 'SIGNED_IN' && session) {
+            // Test Supabase connection
+            await this.testSupabaseConnection();
+            
+            if (!this.fallbackMode) {
+                // Check if user is already logged in via Supabase
+                const { data: { session } } = await this.supabase.auth.getSession();
+                if (session?.user) {
                     this.currentUser = session.user;
                     this.updateUIForLoggedInUser();
-                    this.handleSuccessfulLogin();
-                } else if (event === 'SIGNED_OUT') {
-                    this.currentUser = null;
-                    this.updateUIForLoggedOutUser();
                 }
-            });
+
+                // Listen for auth changes
+                this.supabase.auth.onAuthStateChange((event, session) => {
+                    if (event === 'SIGNED_IN' && session) {
+                        this.currentUser = session.user;
+                        this.updateUIForLoggedInUser();
+                        this.handleSuccessfulLogin();
+                    } else if (event === 'SIGNED_OUT') {
+                        this.currentUser = null;
+                        this.updateUIForLoggedOutUser();
+                    }
+                });
+            } else {
+                // Check for existing fallback session
+                this.checkFallbackSession();
+            }
 
         } catch (error) {
-            console.error('Failed to initialize Supabase:', error);
+            console.error('Failed to initialize Supabase, switching to fallback mode:', error);
+            this.fallbackMode = true;
+            this.checkFallbackSession();
+        }
+    }
+
+    async testSupabaseConnection() {
+        try {
+            // Test with a simple request
+            const { data, error } = await this.supabase.auth.getSession();
+            if (error && error.message.includes('pause')) {
+                throw new Error('Supabase project is paused');
+            }
+        } catch (error) {
+            console.warn('Supabase connection test failed, enabling fallback mode');
+            this.fallbackMode = true;
+            throw error;
+        }
+    }
+
+    checkFallbackSession() {
+        // Check if user is logged in via fallback mode
+        const savedUser = localStorage.getItem('als_fallback_user');
+        if (savedUser) {
+            try {
+                this.currentUser = JSON.parse(savedUser);
+                this.updateUIForLoggedInUser();
+                console.log('Restored fallback session for:', this.getDistrictDisplayName(this.currentUser.email));
+            } catch (error) {
+                console.error('Error restoring fallback session:', error);
+                localStorage.removeItem('als_fallback_user');
+            }
+        } else {
+            this.updateUIForLoggedOutUser();
         }
     }
 
@@ -55,13 +106,14 @@ class SupabaseAuth {
 
     async signIn(email, password) {
         try {
-            console.log('Attempting to sign in with:', email);
+            console.log('Attempting to sign in with:', email, 'Fallback mode:', this.fallbackMode);
             
-            // Check if Supabase is initialized
-            if (!this.supabase) {
-                throw new Error('Supabase client not initialized');
+            // Try fallback authentication first if in fallback mode or Supabase fails
+            if (this.fallbackMode || !this.supabase) {
+                return this.fallbackSignIn(email, password);
             }
 
+            // Try Supabase authentication
             const { data, error } = await this.supabase.auth.signInWithPassword({
                 email: email,
                 password: password
@@ -70,41 +122,120 @@ class SupabaseAuth {
             console.log('Supabase response:', { data: data ? 'received' : 'null', error });
 
             if (error) {
-                throw error;
+                // If Supabase fails, try fallback authentication
+                console.warn('Supabase auth failed, trying fallback:', error.message);
+                return this.fallbackSignIn(email, password);
             }
 
             if (!data || !data.user) {
-                throw new Error('No user data returned from login');
+                // If no user data, try fallback authentication
+                console.warn('No user data from Supabase, trying fallback');
+                return this.fallbackSignIn(email, password);
             }
 
-            console.log('Login successful for user:', data.user.email);
+            console.log('Supabase login successful for user:', data.user.email);
             return { success: true, user: data.user };
+            
         } catch (error) {
-            console.error('Sign in error:', error);
+            console.error('Supabase sign in error, trying fallback:', error);
+            return this.fallbackSignIn(email, password);
+        }
+    }
+
+    fallbackSignIn(email, password) {
+        try {
+            console.log('Attempting fallback authentication for:', email);
             
-            // Handle specific error types
-            let errorMessage = error.message;
-            if (error.message.includes('Invalid login credentials')) {
-                errorMessage = 'Invalid email or password. Please check your credentials.';
-            } else if (error.message.includes('Email not confirmed')) {
-                errorMessage = 'Please confirm your email address before signing in.';
-            } else if (error.message.includes('Too many requests')) {
-                errorMessage = 'Too many login attempts. Please try again later.';
+            // Check if credentials match predefined district credentials
+            if (this.districtCredentials[email] && this.districtCredentials[email] === password) {
+                // Create a mock user object
+                const mockUser = {
+                    email: email,
+                    id: `fallback_${email}`,
+                    created_at: new Date().toISOString(),
+                    user_metadata: {
+                        district: this.getDistrictDisplayName(email)
+                    }
+                };
+                
+                this.currentUser = mockUser;
+                
+                // Save to localStorage for persistence
+                localStorage.setItem('als_fallback_user', JSON.stringify(mockUser));
+                localStorage.setItem('als_fallback_session', Date.now().toString());
+                
+                // Update UI
+                this.updateUIForLoggedInUser();
+                
+                console.log('Fallback login successful for:', this.getDistrictDisplayName(email));
+                
+                // Trigger success handling
+                setTimeout(() => {
+                    this.handleSuccessfulLogin();
+                }, 100);
+                
+                return { success: true, user: mockUser };
+            } else {
+                return { 
+                    success: false, 
+                    error: 'Invalid district or password. Please check your credentials.' 
+                };
             }
-            
-            return { success: false, error: errorMessage };
+        } catch (error) {
+            console.error('Fallback authentication error:', error);
+            return { 
+                success: false, 
+                error: 'Authentication failed. Please try again.' 
+            };
         }
     }
 
     async signOut() {
         try {
+            // Handle fallback mode logout
+            if (this.fallbackMode || !this.supabase) {
+                return this.fallbackSignOut();
+            }
+
+            // Try Supabase logout first
             const { error } = await this.supabase.auth.signOut();
-            if (error) throw error;
+            if (error) {
+                console.warn('Supabase logout failed, using fallback:', error.message);
+                return this.fallbackSignOut();
+            }
+            
+            // Also clear fallback session in case it exists
+            this.clearFallbackSession();
+            
             return { success: true };
         } catch (error) {
-            console.error('Sign out error:', error);
-            return { success: false, error: error.message };
+            console.error('Supabase sign out error, using fallback:', error);
+            return this.fallbackSignOut();
         }
+    }
+
+    fallbackSignOut() {
+        try {
+            // Clear current user
+            this.currentUser = null;
+            
+            // Clear localStorage
+            this.clearFallbackSession();
+            
+            // Update UI
+            this.updateUIForLoggedOutUser();
+            
+            console.log('Fallback logout successful');
+            return { success: true };
+        } catch (error) {
+            console.error('Fallback logout error:', error);
+            return { success: false, error: 'Logout failed. Please try again.' };
+        }
+    }
+
+    clearFallbackSession() {
+        localStorage.removeItem('als_fallback_user');
+        localStorage.removeItem('als_fallback_session');
     }
 
     isAuthenticated() {
@@ -218,17 +349,27 @@ class SupabaseAuth {
         const mobileUserEmail = document.getElementById('mobileUserEmail');
         
         if (this.currentUser && this.currentUser.email) {
+            // Convert email to district name for display
+            const districtName = this.getDistrictDisplayName(this.currentUser.email);
+            const displayName = this.fallbackMode ? `${districtName} (Offline)` : districtName;
+            
             // Desktop
             if (headerUserInfo) headerUserInfo.classList.remove('hidden');
             if (headerLoginBtn) headerLoginBtn.classList.add('hidden');
-            if (headerUserEmail) headerUserEmail.textContent = this.currentUser.email;
+            if (headerUserEmail) headerUserEmail.textContent = displayName;
             
             // Mobile
             if (mobileUserInfo) mobileUserInfo.classList.remove('hidden');
             if (mobileLoginBtn) mobileLoginBtn.classList.add('hidden');
-            if (mobileUserEmail) mobileUserEmail.textContent = this.currentUser.email;
+            if (mobileUserEmail) mobileUserEmail.textContent = displayName;
             
-            console.log('UI updated for logged in user:', this.currentUser.email);
+            // Add offline indicator styling if in fallback mode
+            if (this.fallbackMode) {
+                if (headerUserEmail) headerUserEmail.style.color = '#f59e0b'; // amber-500
+                if (mobileUserEmail) mobileUserEmail.style.color = '#f59e0b';
+            }
+            
+            console.log('UI updated for logged in user:', displayName);
         }
     }
 
@@ -247,7 +388,23 @@ class SupabaseAuth {
         if (mobileUserInfo) mobileUserInfo.classList.add('hidden');
         if (mobileLoginBtn) mobileLoginBtn.classList.remove('hidden');
         
+        // Reset any special styling
+        const headerUserEmail = document.getElementById('headerUserEmail');
+        const mobileUserEmail = document.getElementById('mobileUserEmail');
+        if (headerUserEmail) headerUserEmail.style.color = '';
+        if (mobileUserEmail) mobileUserEmail.style.color = '';
+        
         console.log('UI updated for logged out user');
+    }
+
+    getDistrictDisplayName(email) {
+        const districtMap = {
+            'ManoloDistrict@gmail.com': 'Manolo Fortich District',
+            'MalitbogDistrict@gmail.com': 'Malitbog District',
+            'LibonaDistrict@gmail.com': 'Libona District',
+            'BaungonDistrict@gmail.com': 'Baungon District'
+        };
+        return districtMap[email] || email;
     }
 
     // Handle download button clicks
@@ -284,14 +441,14 @@ function setupAuthEventListeners() {
             
             // Get form data
             const formData = new FormData(loginForm);
-            const email = formData.get('email') || document.getElementById('email')?.value;
+            const district = formData.get('district') || document.getElementById('district')?.value;
             const password = formData.get('password') || document.getElementById('password')?.value;
             
-            console.log('Login attempt:', { email: email ? 'provided' : 'missing', password: password ? 'provided' : 'missing' });
+            console.log('Login attempt:', { district: district ? 'provided' : 'missing', password: password ? 'provided' : 'missing' });
             
             // Validate inputs
-            if (!email || !email.trim()) {
-                authService.showLoginError('Please enter your email address.');
+            if (!district || !district.trim()) {
+                authService.showLoginError('Please select your district.');
                 return;
             }
             
@@ -305,7 +462,8 @@ function setupAuthEventListeners() {
             authService.showLoginSpinner();
             
             try {
-                const result = await authService.signIn(email.trim(), password);
+                // Use district value as email (it contains the email address)
+                const result = await authService.signIn(district.trim(), password);
                 
                 authService.hideLoginSpinner();
                 
@@ -314,12 +472,31 @@ function setupAuthEventListeners() {
                     console.log('Login successful');
                 } else {
                     console.error('Login failed:', result.error);
-                    authService.showLoginError(result.error || 'Invalid email or password. Please try again.');
+                    authService.showLoginError(result.error || 'Invalid district or password. Please try again.');
                 }
             } catch (error) {
                 console.error('Login error:', error);
                 authService.hideLoginSpinner();
                 authService.showLoginError('An error occurred during login. Please try again.');
+            }
+        });
+    }
+
+    // Show/Hide Password Toggle
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const passwordIcon = document.getElementById('passwordIcon');
+    
+    if (togglePassword && passwordInput && passwordIcon) {
+        togglePassword.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
             }
         });
     }
