@@ -7,153 +7,71 @@
     <title>ALS Cluster 1 - Alternative Learning System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/components.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
- <style>
-     /* Custom CSS for elements that need more styling than Tailwind provides */
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("alsbac.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .map-container {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        }
-        
-        .map-iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #f9a826;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .active::after {
-            width: 100%;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .transition-all {
-            transition: all 0.3s ease;
-        }
-
-
-        
- </style>
 </head>
-<body class="font-sans bg-gray-50">
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 w-full bg-blue-900 text-white shadow-lg z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <img src="ALSLOGO.png" alt="DepEd Logo" class="h-12">
-                    <img src="BUKIDNONOLOGO.png" alt="DepEd Logo" class="h-12">
-                    <div>
-                        <h1 class="font-bold text-lg">BUKIDNON ALS CLUSTER I</h1>
-                        <p class="text-xs text-yellow-300">Manolo Fortich, Libona, Baungon, Malitbog</p>
-                    </div>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-white focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#home" class="nav-link active">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#materials" class="nav-link">Materials</a>
-                    <a href="#forms" class="nav-link">Forms</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                    
-                    <!-- Authentication Buttons -->
-                    <div class="ml-4 flex items-center space-x-3">
-                        <!-- Login Button (shown when logged out) -->
-                        <button id="headerLoginBtn" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                            <i class="fas fa-sign-in-alt mr-1"></i>Login
-                        </button>
-                        
-                        <!-- User Info & Logout (shown when logged in) -->
-                        <div id="headerUserInfo" class="hidden flex items-center space-x-3">
-                            <div class="text-right">
-                                <div class="text-sm text-yellow-300">Welcome,</div>
-                                <div id="headerUserEmail" class="text-sm font-medium"></div>
-                            </div>
-                            <button id="headerLogoutBtn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                                <i class="fas fa-sign-out-alt mr-1"></i>Logout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
-                <a href="#home" class="block py-2 nav-link active">Home</a>
-                <a href="#about" class="block py-2 nav-link">About</a>
-                <a href="#materials" class="block py-2 nav-link">Materials</a>
-                <a href="#forms" class="block py-2 nav-link">Forms</a>
-                <a href="#contact" class="block py-2 nav-link">Contact</a>
-                
-                <!-- Mobile Authentication Buttons -->
-                <div class="border-t border-blue-800 mt-3 pt-3">
-                    <!-- Mobile Login Button (shown when logged out) -->
-                    <button id="mobileLoginBtn" class="w-full bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm font-medium transition-colors mb-2">
-                        <i class="fas fa-sign-in-alt mr-1"></i>Login
-                    </button>
-                    
-                    <!-- Mobile User Info & Logout (shown when logged in) -->
-                    <div id="mobileUserInfo" class="hidden">
-                        <div class="text-center mb-2">
-                            <div class="text-sm text-yellow-300">Welcome,</div>
-                            <div id="mobileUserEmail" class="text-sm font-medium"></div>
-                        </div>
-                        <button id="mobileLogoutBtn" class="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium transition-colors">
-                            <i class="fas fa-sign-out-alt mr-1"></i>Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<<body class="font-sans bg-gray-50">
+    
+    <!-- Header Component -->
+    <div id="header-container"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-bg text-white pt-24 pb-16 md:pt-32 md:pb-24">
-  <div class="container mx-auto px-4 text-center">
-    <!-- Updated Text -->
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">Alternative Learning System</h1>
+    <!-- Home Component -->
+    <div id="home-container"></div>
+
+    <!-- About Component -->
+    <div id="about-container"></div>
+
+    <!-- Materials Component -->
+    <div id="materials-container"></div>
+
+    <!-- Forms Component -->
+    <div id="forms-container"></div>
+
+    <!-- Contact Component -->
+    <div id="contact-container"></div>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Load Main JavaScript -->
+    <script src="scripts/main.js"></script>
+
+    <!-- Component Loader Script -->
+    <script>
+        // Function to load HTML component
+        async function loadComponent(containerSelector, componentPath) {
+            try {
+                const response = await fetch(componentPath);
+                const html = await response.text();
+                document.querySelector(containerSelector).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading component ${componentPath}:`, error);
+            }
+        }
+
+        // Load all components when the DOM is ready
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load all components
+            await Promise.all([
+                loadComponent('#header-container', 'components/header.html'),
+                loadComponent('#home-container', 'components/home.html'),
+                loadComponent('#about-container', 'components/about.html'),
+                loadComponent('#materials-container', 'components/materials.html'),
+                loadComponent('#forms-container', 'components/forms.html'),
+                loadComponent('#contact-container', 'components/contact.html'),
+                loadComponent('#footer-container', 'components/footer.html')
+            ]);
+
+            // Initialize main.js functionality after components are loaded
+            setTimeout(() => {
+                // Trigger custom event to reinitialize JavaScript
+                if (typeof window.initializeComponents === 'function') {
+                    window.initializeComponents();
+                }
+            }, 100);
+        });
+    </script>
+</body>
     <h2 class="text-2xl md:text-3xl font-semibold mb-4">BUKIDNON CLUSTER I</h2>
     <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
       Bringing quality and flexible education to learners in Bukidnon.
@@ -213,7 +131,7 @@
     <main class="container mx-auto px-4 py-12 mt-200" id="about">
 
 <section class="mb-16">
-  <div class="text-center max-w-4xl mx-auto mb-8">
+  <div class="text-center max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">What is Alternative Learning System (ALS)?</h2>
     <p class="text-lg text-gray-600 leading-relaxed mb-6">
       The Alternative Learning System (ALS) is a parallel learning system in the Philippines that provides a practical option to the existing formal instruction. 
@@ -222,76 +140,42 @@
     </p>
   </div>
 
-  <!-- ALS Information Accordion -->
-  <div class="max-w-5xl mx-auto">
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-      <!-- Why is there a need for ALS? -->
-      <div class="border-b border-gray-200 last:border-b-0">
-        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="why">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-800">Why is there a need for ALS?</h3>
-            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
-          </div>
-        </button>
-        <div class="accordion-content px-6 pb-4 hidden">
-          <p class="text-gray-700 leading-relaxed">
-            Many Filipinos do not have a chance to attend and finish formal basic education (Grades 1-6 and Years 1-4) due to various reasons. 
-            Some drop out of school while others live in communities without schools. 
-            Since every Filipino has a right to free basic education, the Government established ALS to provide all Filipinos with the chance to access and complete basic education in a way that fits their distinct situations and needs.
-          </p>
-        </div>
-      </div>
+  <!-- Extra Info (Why, Basis, How, Difference) -->
+  <div class="max-w-5xl mx-auto space-y-8 text-gray-700 leading-relaxed">
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">Why is there a need for ALS?</h3>
+      <p>
+        Many Filipinos do not have a chance to attend and finish formal basic education (Grades 1-6 and Years 1-4) due to various reasons. 
+        Some drop out of school while others live in communities without schools. 
+        Since every Filipino has a right to free basic education, the Government established ALS to provide all Filipinos with the chance to access and complete basic education in a way that fits their distinct situations and needs.
+      </p>
+    </div>
 
-      <!-- What is the basis of ALS implementation? -->
-      <div class="border-b border-gray-200 last:border-b-0">
-        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="basis">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-800">What is the basis of ALS implementation?</h3>
-            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
-          </div>
-        </button>
-        <div class="accordion-content px-6 pb-4 hidden">
-          <p class="text-gray-700 leading-relaxed">
-            The 1987 Philippine Constitution recognizes and promotes other forms of education beyond formal schooling. 
-            Article XIV, Section 2, Paragraph (1) mandates the State to establish a complete, adequate, and integrated system of education relevant to the needs of the people and society. 
-            Paragraph (4) also encourages non-formal, informal, and indigenous learning systems, including self-learning and out-of-school study programs.  
-            Furthermore, Republic Act 9155 (The Governance Act for Basic Education) stipulates the establishment of ALS to provide basic education to out-of-school children, youth, and adults.
-          </p>
-        </div>
-      </div>
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">What is the basis of ALS implementation?</h3>
+      <p>
+        The 1987 Philippine Constitution recognizes and promotes other forms of education beyond formal schooling. 
+        Article XIV, Section 2, Paragraph (1) mandates the State to establish a complete, adequate, and integrated system of education relevant to the needs of the people and society. 
+        Paragraph (4) also encourages non-formal, informal, and indigenous learning systems, including self-learning and out-of-school study programs.  
+        Furthermore, Republic Act 9155 (The Governance Act for Basic Education) stipulates the establishment of ALS to provide basic education to out-of-school children, youth, and adults.
+      </p>
+    </div>
 
-      <!-- How does ALS work? -->
-      <div class="border-b border-gray-200 last:border-b-0">
-        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="how">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-800">How does ALS work?</h3>
-            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
-          </div>
-        </button>
-        <div class="accordion-content px-6 pb-4 hidden">
-          <p class="text-gray-700 leading-relaxed">
-            ALS is implemented through two major programs: the Basic Literacy Program and the Continuing Education Program – Accreditation and Equivalency (A&E).  
-            Both programs are modular and flexible, meaning that learning can take place anytime and anywhere, depending on the convenience and availability of learners.
-          </p>
-        </div>
-      </div>
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">How does ALS work?</h3>
+      <p>
+        ALS is implemented through two major programs: the Basic Literacy Program and the Continuing Education Program – Accreditation and Equivalency (A&E).  
+        Both programs are modular and flexible, meaning that learning can take place anytime and anywhere, depending on the convenience and availability of learners.
+      </p>
+    </div>
 
-      <!-- What is the difference between Formal Education and ALS? -->
-      <div class="border-b border-gray-200 last:border-b-0">
-        <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-als="difference">
-          <div class="flex justify-between items-center">
-            <h3 class="text-xl font-semibold text-gray-800">What is the difference between Formal Education and ALS?</h3>
-            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
-          </div>
-        </button>
-        <div class="accordion-content px-6 pb-4 hidden">
-          <p class="text-gray-700 leading-relaxed">
-            The Formal Education system is classroom-based and managed by trained teachers in schools.  
-            In contrast, ALS is non-formal and community-based, conducted in learning centers, barangay halls, libraries, or even homes.  
-            It is facilitated by ALS learning facilitators such as mobile teachers, district ALS coordinators, or instructional managers, at flexible schedules agreed upon by learners and facilitators.
-          </p>
-        </div>
-      </div>
+    <div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">What is the difference between Formal Education and ALS?</h3>
+      <p>
+        The Formal Education system is classroom-based and managed by trained teachers in schools.  
+        In contrast, ALS is non-formal and community-based, conducted in learning centers, barangay halls, libraries, or even homes.  
+        It is facilitated by ALS learning facilitators such as mobile teachers, district ALS coordinators, or instructional managers, at flexible schedules agreed upon by learners and facilitators.
+      </p>
     </div>
   </div>
 </section>
@@ -333,311 +217,340 @@
             </p>
         </div>
 
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-blue-900 mb-4">Meet Our Team</h2>
-            <p class="text-gray-600 mb-4">Our dedicated ALS educators serving 4 municipalities with 20+ teachers</p>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-900 mb-6">Meet Our Team</h2>
         </div>
 
-        <!-- Team Overview - Accordion Style -->
-        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-8">
-            <!-- Municipality Accordion -->
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-                <!-- Educational Program Supervisor -->
-                <div class="border-b border-gray-200 last:border-b-0">
-                    <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-municipality="eps">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-bold text-red-700">Educational Program Supervisor</h3>
-                                <p class="text-sm text-gray-600">EPS II - ALS BUKIDNON</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-red-600 transition-transform duration-300 accordion-arrow"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="flex items-center justify-center pt-2">
-                            <div class="flex items-center space-x-4 p-4 rounded-lg bg-red-50">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-red-400 flex-shrink-0">
-                                    <img src="SIRgigi2.jpg" alt="Alfredo G. De los Santos" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-lg font-bold text-red-700">Alfredo G. De los Santos Jr.</div>
-                                    <div class="text-sm text-red-600">EPS II - ALS BUKIDNON</div>
-                                    <div class="text-xs text-gray-600 mt-1">Supervising all ALS programs in Bukidnon Cluster I</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <!-- Team Member 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIRgigi2.jpg" alt="Alfredo G. De los Santos" class="w-full h-full object-cover">
                 </div>
-                <!-- Manolo Fortich -->
-                <div class="border-b border-gray-200 last:border-b-0">
-                    <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-municipality="manolo">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-bold text-blue-700">Manolo Fortich</h3>
-                                <p class="text-sm text-gray-600">8 Teachers • 4 Districts</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300 accordion-arrow"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="maamkai.jpg" alt="Kathlea Kristine C. De los Santos" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Kathlea Kristine C. De los Santos</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="sirnick.jpg" alt="Nickolas Butaya" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Nickolas Butaya</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="maamjulifer.jpg" alt="Julifer P. Labis" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Julifer P. Labis</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="maamjanet.jpg" alt="Janet Ipanag" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Janet Ipanag</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="SIREINEL.jpg" alt="Reinell Peñaranda Madrona" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Reinell Peñaranda Madrona</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich III</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="sirclaue.jpg" alt="Clauden Mark Llanes" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Clauden Mark Llanes</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich III</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="SIRDAVE.jpg" alt="Maylan Dave B. La Victoria" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Maylan Dave B. La Victoria</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich IV</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-blue-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-400 flex-shrink-0">
-                                    <img src="SIRDUMAOG.jpg" alt="Anthony Edmond G. Dumaog" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Anthony Edmond G. Dumaog</div>
-                                    <div class="text-xs text-red-600">Manolo Fortich IV</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Libona -->
-                <div class="border-b border-gray-200 last:border-b-0">
-                    <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-municipality="libona">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-bold text-green-700">Libona</h3>
-                                <p class="text-sm text-gray-600">6 Teachers • 2 Districts</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300 accordion-arrow"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="MaamCath.jpg" alt="Cathlyn Mae Hatulan" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Cathlyn Mae Hatulan</div>
-                                    <div class="text-xs text-red-600">Libona I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="maamdyline.jpg" alt="Dylin Lucino" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Dylin Lucino</div>
-                                    <div class="text-xs text-red-600">Libona I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="maammarisa.jpg" alt="Marissa Dela Torre" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Marissa Dela Torre</div>
-                                    <div class="text-xs text-red-600">Libona I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="sirmarom.jpg" alt="Marom C. Bulawit" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Marom C. Bulawit</div>
-                                    <div class="text-xs text-red-600">Libona II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="MAAMJOCEL.jpg" alt="Maria Jocel C. Budlong" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Maria Jocel C. Budlong</div>
-                                    <div class="text-xs text-red-600">Libona II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-green-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-green-400 flex-shrink-0">
-                                    <img src="maamaresty.jpg" alt="Aresty Ugtalon" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Aresty Ugtalon</div>
-                                    <div class="text-xs text-red-600">Libona II</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Baungon -->
-                <div class="border-b border-gray-200 last:border-b-0">
-                    <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-municipality="baungon">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-bold text-purple-700">Baungon</h3>
-                                <p class="text-sm text-gray-600">4 Teachers • 2 Districts</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300 accordion-arrow"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-purple-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 flex-shrink-0">
-                                    <img src="maamShahanie.jpg" alt="Shahanie Magdale Galarpe" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Shahanie Magdale Galarpe</div>
-                                    <div class="text-xs text-red-600">Baungon I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-purple-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 flex-shrink-0">
-                                    <img src="SIRKVEN.jpg" alt="Mc Khevin Verga" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Mc Khevin Verga</div>
-                                    <div class="text-xs text-red-600">Baungon I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-purple-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 flex-shrink-0">
-                                    <img src="maamvan.jpg" alt="Vannisa Arrabis" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Vannisa Arrabis</div>
-                                    <div class="text-xs text-red-600">Baungon II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-purple-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400 flex-shrink-0">
-                                    <img src="maamjean.jpg" alt="Mary Jean Villastique - Quidoc" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Mary Jean Villastique - Quidoc</div>
-                                    <div class="text-xs text-red-600">Baungon II</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Malitbog -->
-                <div class="border-b border-gray-200 last:border-b-0">
-                    <button class="w-full px-6 py-4 text-left hover:bg-gray-50 transition-colors accordion-header" data-municipality="malitbog">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h3 class="text-lg font-bold text-orange-700">Malitbog</h3>
-                                <p class="text-sm text-gray-600">4 Teachers • 2 Districts</p>
-                            </div>
-                            <i class="fas fa-chevron-down text-orange-600 transition-transform duration-300 accordion-arrow"></i>
-                        </div>
-                    </button>
-                    <div class="accordion-content px-6 pb-4 hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-orange-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0">
-                                    <img src="sirtonmalitbog.jpg" alt="Rey Anthony Dalugdug" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Rey Anthony Dalugdug</div>
-                                    <div class="text-xs text-red-600">Malitbog I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-orange-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0">
-                                    <img src="SIRMIC.jpg" alt="Michael Jhun Q. Paculob" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Michael Jhun Q. Paculob</div>
-                                    <div class="text-xs text-red-600">Malitbog I</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-orange-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0">
-                                    <img src="siren.jpg" alt="Renante Esta" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Renante Esta</div>
-                                    <div class="text-xs text-red-600">Malitbog II</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-orange-50 transition-colors">
-                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0">
-                                    <img src="sirsevilla.jpg" alt="Eldan John Sevilla" class="w-full h-full object-cover object-center">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="text-sm font-medium text-gray-800">Eldan John Sevilla</div>
-                                    <div class="text-xs text-red-600">Malitbog II</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Alfredo G. De los Santos</h4>
+                <p class="text-red-700 mb-2">EPS II - ALS BUKIDNON</p>
+                <p class="text-gray-600 text-sm mb-4">20 years of ALS teaching experience</p>
+                <div class="mt-3">
+                    <a href="mailto:alfredo.delossantos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
                 </div>
             </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamkai.jpg" alt="Juan Dela Cruz" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Kathlea Kristine C. De los Santos</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:juan.delacruz@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamjulifer.jpg" alt="Ana Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Julifer P. Labis</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:ana.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIREINEL.jpg" alt="Pedro Bautista" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Reinell Peñaranda Madrona</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich III</p>
+                <p class="text-gray-600 text-sm mb-4">Outreach and Community Engagement</p>
+                <div class="mt-3">
+                    <a href="mailto:pedro.bautista@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-8">
+            <a href="#full-team" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition-all">
+                <i class="fas fa-users mr-2"></i>View All Cluster I ALS Teachers
+            </a>
         </div>
     </div>
 </section>
 
+<!-- Full Team Section (hidden by default) -->
+<section id="full-team" class="hidden py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2">All Cluster I ALS Teachers</h2>
+            <p class="text-gray-600">Meet our complete team of dedicated educators</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="sirtonmalitbog.jpg" alt="Alfredo G. De los Santos" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Rey Anthony Dalugdug</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Malitbog I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Social Sciences</p>
+                <div class="mt-3">
+                    <a href="mailto:alfredo.delossantos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamShahanie.jpg" alt="Juan Dela Cruz" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Shahanie Magdale Galarpe</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Baungon I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:juan.delacruz@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="sirnick.jpg" alt="Ana Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Nickolas Butaya</h4>   
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:ana.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="sirmarom.jpg" alt="Pedro Bautista" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Marom C. Bulawit</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona II</p>
+                <p class="text-gray-600 text-sm mb-4">Outreach and Community Engagement</p>
+                <div class="mt-3">
+                    <a href="mailto:pedro.bautista@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- Additional Team Members (you can add more as needed) -->
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIRMIC.jpg" alt="Maria Santos" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Michael Jhun Q. Paculob</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Malitbog I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Elementary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:maria.santos@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIRKVEN.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Mc Khevin Verga</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Baungon I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIRDAVE.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Maylan Dave B. La Victoria</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich IV</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="MAAMJOCEL.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Maria Jocel C. Budlong</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamaresty.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Aresty Ugtalon</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="SIRDUMAOG.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Anthony Edmond G. Dumaog</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich IV</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="siren.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Renante Esta</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Malitbog II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+                
+            </div>
+            
+            
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamjanet.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Janet Ipanag</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo Fortich II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="MaamCath.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Cathlyn Mae Hatulan</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamdyline.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Dylin Lucino</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maammarisa.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Marissa Dela Torre</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Libona I</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamvan.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Vannisa Arrabis</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Baungon II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>    
+            </div>
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="sirclaue.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Clauden Mark Llanes</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Manolo III</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+                
+            </div>
+            
+             <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="maamjean.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Mary Jean Villastique - Quidoc</h4>
+                <p class="text-red-700 mb-2">ALS Teacher - Baungon II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+                
+                
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-lg team-card">
+                <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
+                    <img src="sirsevilla.jpg" alt="Carlos Reyes" class="w-full h-full object-cover">
+                </div>
+                <h4 class="text-xl font-bold text-blue-900 mb-1">Eldan John Sevilla</h4>
+                <p class="text-red-700 mb-2">ALS Teacher -  II</p>
+                <p class="text-gray-600 text-sm mb-4">Specializes in Secondary Level</p>
+                <div class="mt-3">
+                    <a href="mailto:carlos.reyes@example.com" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-envelope mr-1"></i> Email</a>
+                </div>
+            
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="#" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition-all close-team">
+                <i class="fas fa-times mr-2"></i>Close Team View
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const viewAllBtn = document.querySelector('a[href="#full-team"]');
+    const teamSection = document.getElementById('full-team');
+    const closeBtn = document.querySelector('.close-team');
+    
+    viewAllBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        teamSection.classList.remove('hidden');
+        teamSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        teamSection.classList.add('hidden');
+        // Scroll back to the about section
+        document.querySelector('section.py-16.bg-white').scrollIntoView({ behavior: 'smooth' });
+    });
+});
+</script>
+
+</body>
+</html>
    <!-- Materials Section -->
 <section id="materials" class="py-16 bg-white">
     <div class="container mx-auto px-4">
@@ -1109,8 +1022,8 @@
                         </div>
                         
                         <div>
-                            <label for="contactEmail" class="block text-gray-700 font-medium mb-1">Email Address</label>
-                            <input type="email" id="contactEmail" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="email" class="block text-gray-700 font-medium mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         
                         <div>
@@ -1342,157 +1255,6 @@
                         }
                     });
                 }
-            });
-        });
-    </script>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative">
-            <!-- Close Button -->
-            <button id="closeLoginModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            
-            <!-- Modal Header -->
-            <div class="text-center mb-6">
-                <div class="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <i class="fas fa-lock text-blue-600 text-2xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Access Required</h2>
-                <p class="text-gray-600">Please sign in to download learning materials</p>
-            </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label for="district" class="block text-sm font-medium text-gray-700 mb-1">District</label>
-                    <select 
-                        id="district" 
-                        name="district" 
-                        required 
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                        <option value="">Select your district</option>
-                        <option value="ManoloDistrict@gmail.com">Manolo Fortich</option>
-                        <option value="MalitbogDistrict@gmail.com">Malitbog</option>
-                        <option value="LibonaDistrict@gmail.com">Libona</option>
-                        <option value="BaungonDistrict@gmail.com">Baungon</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <div class="relative">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            required 
-                            class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Enter your password"
-                        >
-                        <button 
-                            type="button" 
-                            id="togglePassword" 
-                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
-                        >
-                            <i id="passwordIcon" class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <button 
-                    type="submit" 
-                    id="loginButton"
-                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200"
-                >
-                    <span id="loginButtonText">Sign In</span>
-                    <i id="loginSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
-                </button>
-            </form>
-
-            <!-- Error Message -->
-            <div id="loginError" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded hidden">
-                <i class="fas fa-exclamation-circle mr-2"></i>
-                <span id="loginErrorText">Invalid email or password. Please try again.</span>
-            </div>
-
-            <!-- Success Message -->
-            <div id="loginSuccess" class="mt-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded hidden">
-                <i class="fas fa-check-circle mr-2"></i>
-                <span>Login successful! Starting download...</span>
-            </div>
-
-            <!-- Contact Admin -->
-            <div class="mt-6 pt-6 border-t border-gray-200">
-                <div class="text-center">
-                    <p class="text-sm text-gray-600 mb-2">Don't have an account?</p>
-                    <p class="text-sm text-gray-800 font-medium mb-2">Contact Administrator:</p>
-                    <div class="flex flex-col space-y-2">
-                        <a href="mailto:als.bukidnon@deped.gov.ph" class="text-blue-600 hover:text-blue-800 text-sm">
-                            <i class="fas fa-envelope mr-2"></i>als.bukidnon@deped.gov.ph
-                        </a>
-                        <a href="tel:(088) 813-5665" class="text-blue-600 hover:text-blue-800 text-sm">
-                            <i class="fas fa-phone mr-2"></i>(088) 813-5665
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Authentication Script -->
-    <script src="scripts/auth.js"></script>
-    
-    <!-- Main JavaScript functionality -->
-    <script src="scripts/main.js"></script>
-    
-    <!-- Debug Script for Accordion -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, checking accordion elements...');
-            
-            const accordionHeaders = document.querySelectorAll('.accordion-header');
-            console.log('Found accordion headers:', accordionHeaders.length);
-            
-            accordionHeaders.forEach((header, index) => {
-                console.log(`Header ${index}:`, header);
-                console.log(`Next sibling:`, header.nextElementSibling);
-                
-                header.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Accordion clicked:', this.getAttribute('data-municipality'));
-                    
-                    const content = this.nextElementSibling;
-                    const arrow = this.querySelector('.accordion-arrow');
-                    const isOpen = !content.classList.contains('hidden');
-                    
-                    console.log('Content element:', content);
-                    console.log('Arrow element:', arrow);
-                    console.log('Is currently open:', isOpen);
-                    
-                    // Close all other accordions
-                    accordionHeaders.forEach(otherHeader => {
-                        if (otherHeader !== this) {
-                            const otherContent = otherHeader.nextElementSibling;
-                            const otherArrow = otherHeader.querySelector('.accordion-arrow');
-                            otherContent.classList.add('hidden');
-                            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
-                        }
-                    });
-                    
-                    // Toggle current accordion
-                    if (isOpen) {
-                        content.classList.add('hidden');
-                        if (arrow) arrow.style.transform = 'rotate(0deg)';
-                        console.log('Closed accordion');
-                    } else {
-                        content.classList.remove('hidden');
-                        if (arrow) arrow.style.transform = 'rotate(180deg)';
-                        console.log('Opened accordion');
-                    }
-                });
             });
         });
     </script>
