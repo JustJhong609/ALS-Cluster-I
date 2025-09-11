@@ -1,0 +1,40 @@
+<!-- Navigation Bar -->
+<nav class="fixed top-0 w-full bg-blue-900 text-white shadow-lg z-50">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="ALSLOGO.png" alt="DepEd Logo" class="h-12">
+                <img src="BUKIDNONOLOGO.png" alt="DepEd Logo" class="h-12">
+                <div>
+                    <h1 class="font-bold text-lg">BUKIDNON ALS CLUSTER I</h1>
+                    <p class="text-xs text-yellow-300">Manolo Fortich, Libona, Baungon, Malitbog</p>
+                </div>
+            </div>
+            
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#materials" class="nav-link">Materials</a>
+                <a href="#forms" class="nav-link">Forms</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-2">
+            <a href="#home" class="block py-2 nav-link active">Home</a>
+            <a href="#about" class="block py-2 nav-link">About</a>
+            <a href="#materials" class="block py-2 nav-link">Materials</a>
+            <a href="#forms" class="block py-2 nav-link">Forms</a>
+            <a href="#contact" class="block py-2 nav-link">Contact</a>
+        </div>
+    </div>
+</nav>
