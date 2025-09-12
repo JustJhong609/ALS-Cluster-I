@@ -1,19 +1,25 @@
 // Supabase Configuration and Authentication Service
 class SupabaseAuth {
     constructor() {
-        this.supabaseUrl = 'https://wqgtwawhychppihoeedf.supabase.co';
-        this.supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxZ3R3YXdoeWNocHBpaG9lZWRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyMDg3NDcsImV4cCI6MjA3Mjc4NDc0N30.LnWuNXlbQ-2VcykA1cm91YqMaduNSy4EXvH__gE3Th0';
+        // Updated Supabase credentials
+        this.supabaseUrl = 'https://certnmtfowqvnoajwlgx.supabase.co';
+        this.supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlcnRubXRmb3dxdm5vYWp3bGd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1NTgxNTYsImV4cCI6MjA3MzEzNDE1Nn0.Q1jB4j3GIJhQoFGoRV7UhRlthDKUO7J4GumUL6Mkb_M';
         this.supabase = null;
         this.currentUser = null;
         this.pendingDownloadUrl = null;
         this.fallbackMode = false;
         
+        // Auto-logout configuration
+        this.inactivityTimeout = 10 * 60 * 1000; // 10 minutes in milliseconds
+        this.inactivityTimer = null;
+        this.lastActivity = Date.now();
+        
         // Predefined district credentials for fallback authentication
         this.districtCredentials = {
-            'ManoloDistrict@gmail.com': 'ManoloDistrict12345',
-            'MalitbogDistrict@gmail.com': 'MalitbogDistrict12345',
-            'LibonaDistrict@gmail.com': 'LibonaDistrict12345',
-            'BaungonDistrict@gmail.com': 'BaungonDistrict12345'
+            'baungondistrict@gmail.com': 'BaungonDistrict12345',
+            'libonadistrict@gmail.com': 'LibonaDistrict12345',
+            'malitbogdistrict@gmail.com': 'MalitbogDistrict12345',
+            'manolodistrict@gmail.com': 'ManoloDistrict12345'
         };
         
         this.init();
@@ -38,6 +44,8 @@ class SupabaseAuth {
                 if (session?.user) {
                     this.currentUser = session.user;
                     this.updateUIForLoggedInUser();
+                    // Start inactivity timer for existing session
+                    this.initInactivityTimer();
                 }
 
                 // Listen for auth changes
@@ -84,6 +92,8 @@ class SupabaseAuth {
             try {
                 this.currentUser = JSON.parse(savedUser);
                 this.updateUIForLoggedInUser();
+                // Start inactivity timer for existing session
+                this.initInactivityTimer();
                 console.log('Restored fallback session for:', this.getDistrictDisplayName(this.currentUser.email));
             } catch (error) {
                 console.error('Error restoring fallback session:', error);
@@ -102,6 +112,65 @@ class SupabaseAuth {
             script.onerror = reject;
             document.head.appendChild(script);
         });
+    }
+
+    // Auto-logout functionality
+    initInactivityTimer() {
+        // Events that count as user activity
+        const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+        
+        // Reset the timer on any activity
+        const resetTimer = () => {
+            this.lastActivity = Date.now();
+            this.resetInactivityTimer();
+        };
+
+        // Add event listeners for user activity
+        events.forEach(event => {
+            document.addEventListener(event, resetTimer, true);
+        });
+
+        // Start the initial timer
+        this.resetInactivityTimer();
+    }
+
+    resetInactivityTimer() {
+        // Clear existing timer
+        if (this.inactivityTimer) {
+            clearTimeout(this.inactivityTimer);
+        }
+
+        // Set new timer
+        this.inactivityTimer = setTimeout(() => {
+            this.handleInactivityLogout();
+        }, this.inactivityTimeout);
+    }
+
+    async handleInactivityLogout() {
+        if (this.currentUser) {
+            console.log('Auto-logout due to inactivity');
+            
+            // Show warning before logout
+            const shouldLogout = confirm(
+                'You have been inactive for 10 minutes. You will be logged out for security reasons.\n\n' +
+                'Click OK to logout now, or Cancel to stay logged in.'
+            );
+
+            if (shouldLogout) {
+                await this.signOut();
+                alert('You have been logged out due to inactivity. Please log in again to continue.');
+            } else {
+                // User chose to stay, reset the timer
+                this.resetInactivityTimer();
+            }
+        }
+    }
+
+    stopInactivityTimer() {
+        if (this.inactivityTimer) {
+            clearTimeout(this.inactivityTimer);
+            this.inactivityTimer = null;
+        }
     }
 
     async signIn(email, password) {
@@ -192,6 +261,9 @@ class SupabaseAuth {
 
     async signOut() {
         try {
+            // Stop inactivity timer
+            this.stopInactivityTimer();
+            
             // Handle fallback mode logout
             if (this.fallbackMode || !this.supabase) {
                 return this.fallbackSignOut();
@@ -216,6 +288,9 @@ class SupabaseAuth {
 
     fallbackSignOut() {
         try {
+            // Stop inactivity timer
+            this.stopInactivityTimer();
+            
             // Clear current user
             this.currentUser = null;
             
@@ -329,6 +404,9 @@ class SupabaseAuth {
     handleSuccessfulLogin() {
         this.showLoginSuccess();
         
+        // Start inactivity timer for auto-logout
+        this.initInactivityTimer();
+        
         setTimeout(() => {
             if (this.pendingDownloadUrl) {
                 // Proceed with download
@@ -399,10 +477,10 @@ class SupabaseAuth {
 
     getDistrictDisplayName(email) {
         const districtMap = {
-            'ManoloDistrict@gmail.com': 'Manolo Fortich District',
-            'MalitbogDistrict@gmail.com': 'Malitbog District',
-            'LibonaDistrict@gmail.com': 'Libona District',
-            'BaungonDistrict@gmail.com': 'Baungon District'
+            'baungondistrict@gmail.com': 'Baungon District',
+            'libonadistrict@gmail.com': 'Libona District',
+            'malitbogdistrict@gmail.com': 'Malitbog District',
+            'manolodistrict@gmail.com': 'Manolo Fortich District'
         };
         return districtMap[email] || email;
     }
