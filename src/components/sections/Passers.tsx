@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, GraduationCap, ExternalLink } from "lucide-react";
 import { ALS_PASSERS_CARDS } from "@/constants";
+import { AccessCodeModal } from "@/components/ui/AccessCodeModal";
 import {
   fadeInUp,
   staggerContainer,
@@ -38,6 +39,20 @@ const colorConfig: Record<string, { bg: string; iconBg: string; iconText: string
 export function Passers() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<typeof ALS_PASSERS_CARDS[0] | null>(null);
+
+  const handleViewClick = (e: React.MouseEvent<HTMLAnchorElement>, card: typeof ALS_PASSERS_CARDS[0]) => {
+    e.preventDefault();
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleAccessGranted = () => {
+    if (selectedCard) {
+      window.open(selectedCard.link, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <section
@@ -110,11 +125,10 @@ export function Passers() {
                   {/* Button */}
                   <motion.a
                     href={card.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={(e) => handleViewClick(e, card)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`inline-flex items-center justify-center gap-2 ${colors.button} text-white font-bold py-3 px-8 rounded-xl transition-colors mx-auto`}
+                    className={`inline-flex items-center justify-center gap-2 ${colors.button} text-white font-bold py-3 px-8 rounded-xl transition-colors mx-auto cursor-pointer`}
                   >
                     <ExternalLink className="w-4 h-4" />
                     View
@@ -125,6 +139,14 @@ export function Passers() {
           })}
         </motion.div>
       </div>
+
+      {/* Access Code Modal */}
+      <AccessCodeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAccessGranted={handleAccessGranted}
+        resourceTitle={selectedCard ? `${selectedCard.subtitle} - ${selectedCard.title}` : ""}
+      />
     </section>
   );
 }

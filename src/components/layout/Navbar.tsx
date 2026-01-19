@@ -8,13 +8,20 @@ import { Menu, X, LogIn, LogOut, User } from "lucide-react";
 import { NAV_LINKS, SITE_CONFIG } from "@/constants";
 import { cn, scrollToSection } from "@/utils/helpers";
 import { navbarSlide, mobileMenuSlide, fadeInDown } from "@/utils/animations";
+import { useAuth } from "@/contexts/AuthContext";
+import { LoginModal } from "@/components/ui/LoginModal";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // For future Supabase auth
+  const { auth, logout } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginSuccess = useCallback(() => {
+    setShowLoginModal(false);
+  }, []);
 
   const { scrollY } = useScroll();
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -153,14 +160,14 @@ export function Navbar() {
 
             {/* Auth Button */}
             <div className="ml-4 pl-4 border-l border-white/20">
-              {isLoggedIn ? (
+              {auth.isLoggedIn ? (
                 <div className="flex items-center gap-3">
                   <div className="text-right hidden lg:block">
                     <p className="text-accent-400 text-xs">Welcome,</p>
-                    <p className="text-white text-sm font-medium">User</p>
+                    <p className="text-white text-sm font-medium">{auth.district || "User"}</p>
                   </div>
                   <button
-                    onClick={() => setIsLoggedIn(false)}
+                    onClick={logout}
                     className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                   >
                     <LogOut className="w-4 h-4" />
@@ -169,7 +176,7 @@ export function Navbar() {
                 </div>
               ) : (
                 <button
-                  onClick={() => setIsLoggedIn(true)}
+                  onClick={() => setShowLoginModal(true)}
                   className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                 >
                   <LogIn className="w-4 h-4" />
@@ -253,7 +260,7 @@ export function Navbar() {
                   transition={{ delay: NAV_LINKS.length * 0.05 }}
                   className="pt-4 mt-4 border-t border-white/10"
                 >
-                  {isLoggedIn ? (
+                  {auth.isLoggedIn ? (
                     <div className="space-y-3 px-4">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full bg-accent-500 flex items-center justify-center">
@@ -261,12 +268,12 @@ export function Navbar() {
                         </div>
                         <div>
                           <p className="text-accent-400 text-xs">Welcome,</p>
-                          <p className="text-white font-medium">User</p>
+                          <p className="text-white font-medium">{auth.district || "User"}</p>
                         </div>
                       </div>
                       <button
                         onClick={() => {
-                          setIsLoggedIn(false);
+                          logout();
                           setIsOpen(false);
                         }}
                         className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-200"
@@ -278,7 +285,7 @@ export function Navbar() {
                   ) : (
                     <button
                       onClick={() => {
-                        setIsLoggedIn(true);
+                        setShowLoginModal(true);
                         setIsOpen(false);
                       }}
                       className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-200 mx-4"
@@ -294,6 +301,14 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </nav>
+
+      {/* Login Modal for manual login */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onLoginSuccess={handleLoginSuccess}
+        pendingDownloadUrl={null}
+      />
     </motion.header>
   );
 }

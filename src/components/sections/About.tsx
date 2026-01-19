@@ -99,7 +99,7 @@ export function About() {
                   <div className="text-sm text-gray-600">Municipalities</div>
                 </div>
                 <div className="text-center p-4 bg-accent-50 rounded-xl">
-                  <div className="text-3xl font-bold text-accent-600">500+</div>
+                  <div className="text-3xl font-bold text-accent-600">1200+</div>
                   <div className="text-sm text-gray-600">Learners Served</div>
                 </div>
               </div>

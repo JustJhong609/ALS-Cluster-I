@@ -82,6 +82,14 @@ export const TEAM_MEMBERS: TeamMember[] = [
     bio: "Ma'am Kai specializes in elementary-level instruction, bringing creativity and patience to her teaching approach. She believes in the potential of every learner and works tirelessly to create an inclusive learning environment.",
   },
   {
+    id: "17",
+    name: "Mc Khevin Verga",
+    role: "ALS Teacher - Manolo Fortich I",
+    district: "Manolo Fortich",
+    imageUrl: "/images/images/SIRKVEN.jpg",
+    specialization: "Secondary Level",
+  },
+  {
     id: "3",
     name: "Julifer P. Labis",
     role: "ALS Teacher - Manolo Fortich II",
@@ -98,14 +106,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     imageUrl: "/images/images/SIREINEL.jpg",
     specialization: "Outreach and Community Engagement",
     bio: "Sir Reinell focuses on community outreach, bringing ALS programs to remote barangays in Manolo Fortich. His dedication to reaching underserved communities has expanded educational opportunities for many out-of-school youth.",
-  },
-  {
-    id: "5",
-    name: "Nickolas Butaya",
-    role: "ALS Teacher - Manolo Fortich I",
-    district: "Manolo Fortich",
-    imageUrl: "/images/images/sirnick.jpg",
-    specialization: "Secondary Level",
   },
   {
     id: "6",
@@ -196,14 +196,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     district: "Baungon",
     imageUrl: "/images/images/maamShahanie.jpg",
     specialization: "Elementary Level",
-  },
-  {
-    id: "17",
-    name: "Mc Khevin Verga",
-    role: "ALS Teacher - Baungon I",
-    district: "Baungon",
-    imageUrl: "/images/images/SIRKVEN.jpg",
-    specialization: "Secondary Level",
   },
   {
     id: "18",

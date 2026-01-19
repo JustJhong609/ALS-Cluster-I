@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Lock, MapPin, Eye, EyeOff, Loader2, Mail, Phone, CheckCircle, AlertCircle } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 // District credentials (same as v1)
 const DISTRICT_OPTIONS = [
@@ -50,6 +51,7 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess, pendingDownloadUrl
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const { login } = useAuth();
 
   // Reset form when modal closes
   useEffect(() => {
@@ -98,19 +100,18 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess, pendingDownloadUrl
     if (password === selectedDistrict.password) {
       setSuccess(true);
       
-      // Save login state
-      localStorage.setItem("als_auth", JSON.stringify({
-        district: selectedDistrict.label,
-        email: selectedDistrict.value,
-        loginTime: Date.now(),
-      }));
+      // Use AuthContext login function
+      login(selectedDistrict.label, selectedDistrict.value);
 
       // Wait a moment to show success message
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Trigger download
+      // Trigger download if there's a pending URL
       if (pendingDownloadUrl) {
         onLoginSuccess(pendingDownloadUrl);
+      } else {
+        // Just close the modal for manual login
+        onLoginSuccess("");
       }
       
       onClose();
@@ -129,7 +130,7 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess, pendingDownloadUrl
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto min-h-screen"
           onClick={() => !isLoading && onClose()}
         >
           <motion.div
@@ -137,7 +138,7 @@ export function LoginModal({ isOpen, onClose, onLoginSuccess, pendingDownloadUrl
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden"
+            className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden my-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
