@@ -1,114 +1,164 @@
-# 🌍 Bukidnon ALS Cluster 1 – Alternative Learning System  
+# ALS Cluster I - Version 2.0
 
-![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-2ea44f?logo=github)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CDN-38B2AC?logo=tailwind-css&logoColor=white)
-![Static Website](https://img.shields.io/badge/Type-Static%20Website-blue)
-![Status](https://img.shields.io/badge/Status-In%20Development-orange)
-![Contributors](https://img.shields.io/github/contributors/JustJhong609/ALS-Cluster-I) 
+Modern, responsive website for the Alternative Learning System (ALS) Cluster I in Bukidnon, Philippines.
 
+## 🚀 Tech Stack
 
----
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript (Strict mode)
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **Icons:** Lucide React
+- **Database/Auth:** Supabase (prepared for future implementation)
 
-## 📑 Table of Contents
-- [Live Preview](#-live-preview) 
-- [Preview](#️-preview)
-- [Features](#-features)
-- [Project Structure](#-project-structure)
-- [Deployment](#-deployment)
-- [Technologies Used](#-technologies-used)
-- [About the Project](#-about-the-project)
-- [Contributing](#-contributing)
-- [Roadmap](#-roadmap)
-- [License](#-license)
-- [Credits & Acknowledgments](#-credits--acknowledgments)
+## 📁 Project Structure
 
----
+```
+v2/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── globals.css         # Global styles
+│   │   ├── layout.tsx          # Root layout
+│   │   └── page.tsx            # Homepage
+│   ├── components/
+│   │   ├── layout/             # Layout components
+│   │   │   ├── Navbar.tsx      # Navigation with glassmorphism
+│   │   │   └── Footer.tsx      # Footer component
+│   │   ├── sections/           # Page sections
+│   │   │   ├── Hero.tsx        # Hero with parallax
+│   │   │   ├── VideoIntro.tsx  # Video introduction
+│   │   │   ├── About.tsx       # About with accordion
+│   │   │   ├── Team.tsx        # Team with filters
+│   │   │   ├── Materials.tsx   # Materials bento grid
+│   │   │   ├── Passers.tsx     # Timeline of passers
+│   │   │   └── Contact.tsx     # Contact form
+│   │   └── ui/                 # Reusable UI components
+│   │       └── ScrollToTop.tsx
+│   ├── constants/              # Static data
+│   │   └── index.ts
+│   ├── hooks/                  # Custom React hooks
+│   │   └── index.ts
+│   ├── lib/                    # External libraries setup
+│   │   └── supabase.ts
+│   ├── types/                  # TypeScript types
+│   │   └── index.ts
+│   └── utils/                  # Utility functions
+│       ├── animations.ts       # Framer Motion variants
+│       └── helpers.ts          # Helper functions
+├── public/
+│   └── images/                 # Static images
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+└── next.config.mjs
+```
 
-## 🌐 Live Preview  
-📍 [Visit the Website on GitHub Pages](https://justjhong609.github.io/ALS-Cluster-I/)  
+## 🛠️ Getting Started
 
-*(Vercel deployment planned in the future)*  
+### Prerequisites
 
----
+- Node.js 18.17 or later
+- npm or yarn
 
-## 🖼️ Preview
-> Here’s a quick look at the project interface:  
+### Installation
 
-![Homepage Screenshot](assets/preview-home.png)  
-*(Replace with actual screenshot or demo GIF)*  
+1. Navigate to the v2 directory:
+   ```bash
+   cd v2
+   ```
 
----
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## ✨ Features
-- 📚 **Downloadable Materials** – Learners can easily access ALS modules via Google Drive.  
-- 🗺 **Google Maps Integration** – Locate the DepEd Division of Bukidnon directly from the website.  
-- 🎨 **Responsive Design** – Fully mobile-friendly with Tailwind CSS. 
-- 🚀 **Fast Deployment** – Works seamlessly on GitHub Pages, with future support for Vercel.  
+3. Create environment file:
+   ```bash
+   cp .env.local.example .env.local
+   ```
 
----
+4. (Optional) Add your Supabase credentials to `.env.local`
 
-## 📂 Project Structure
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-├── index.html        # Main entry point
-├── about.html        # About ALS Cluster 1
-├── contact.html      # Contact page with Google Maps embed
-├── assets/           # Images, styles, and other resources
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
----
+## 🎨 Design System
 
-## 🚀 Deployment
-This project can be deployed on:
-- **GitHub Pages**  
-- **Vercel** (recommended for fast, global hosting)
+### Colors (DepEd Theme)
 
-Example live URL (replace with your deployment):  
-👉 [https://your-username.github.io/als-cluster-1/](https://your-username.github.io/als-cluster-1/)  
-or  
-👉 [https://als-cluster-1.vercel.app](https://als-cluster-1.vercel.app)
+- **Primary Blue:** `#1e3a8a` - Main brand color
+- **Accent Gold:** `#f9a826` - Highlights and CTAs
+- **DepEd Red:** `#b91c1c` - Secondary accent
 
----
+### Typography
 
-## 🛠️ Technologies Used
-- **HTML5**
-- **Tailwind CSS (CDN)**
-- **Google Maps Embed**
-- **GitHub Pages / Vercel**
+- **Headings:** Poppins (font-heading)
+- **Body:** Inter (font-sans)
 
----
+### Components
 
-## 📌 About the Project
-This project was created to help **Alternative Learning System (ALS) learners in Cluster 1** access resources digitally.  
-It aligns with the mission of **DepEd Division of Bukidnon** to provide **inclusive education** for all.
+- **Glassmorphism:** Used in navbar and cards
+- **Bento Grid:** Materials section layout
+- **Cards with Hover Lift:** Team and material cards
 
----
+## 📱 Features
 
-## License & Usage
+1. **Responsive Design** - Mobile-first approach
+2. **Smooth Animations** - Scroll reveals and transitions
+3. **Parallax Hero** - Immersive hero section
+4. **Auto-hide Navbar** - Hides on scroll down, reveals on scroll up
+5. **Accordion FAQ** - Interactive about section
+6. **Tabbed Filtering** - Team and materials filtering
+7. **Timeline View** - ALS passers timeline
+8. **Contact Form** - Ready for Supabase integration
+9. **Protected Downloads** - Login required to download materials
+10. **Collapsible Team Section** - "See All Teachers" toggle
 
-This project is **not open-source**.
+## 🚀 Vercel Deployment
 
-Use, distribution, or modification of this code is **not permitted without explicit written permission** from the author.
+### Quick Deploy
 
-- Academic or research use may be granted **with permission and proper attribution**.
-- **Commercial use is strictly prohibited** unless licensed separately.
+1. Push your code to GitHub
+2. Import the project in [Vercel](https://vercel.com/new)
+3. Set the **Root Directory** to `v2`
+4. Add environment variables in Vercel dashboard:
+   - `NEXT_PUBLIC_SUPABASE_URL`: `https://certnmtfowqvnoajwlgx.supabase.co`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon key
 
-For inquiries or permission requests, please contact:  
-📧 **[20211199@nbsc.edu.ph]**
+### Environment Variables
 
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon/public key |
 
----
+## 🔮 Future Enhancements
 
----
+- [ ] Supabase authentication (backend)
+- [ ] Admin dashboard
+- [ ] Contact form backend
+- [ ] Real-time team data
+- [ ] Blog/News section
+- [ ] Dark mode toggle
 
-## 🙏 Credits & Acknowledgments
+## 📝 Scripts
 
-This project was made possible through the collaboration, dedication, and support of individuals committed to advancing the goals of the **Alternative Learning System (ALS)** in Bukidnon.
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Run ESLint
+npm run type-check # Check TypeScript types
+```
 
-- **Developer: [Jhong](https://github.com/JustJhong609)**  
-  For the development, maintenance, and deployment of the website, ensuring its functionality and accessibility for users.
+## 👨‍💻 Developer
 
-- **Alfredo G. De los Santos Jr., EPS II, Division of Bukidnon**  
-  For providing the comprehensive learning modules, downloadable materials, assets, layout framework, and valuable content that shaped the structure and direction of the platform.
+Website designed and developed by [Jhong](https://github.com/JustJhong609)
 
-We extend our sincere gratitude to all contributors whose time, expertise, and insights have played a vital role in bringing this project to life in support of inclusive education through ALS.
+## 📄 License
 
-
+© 2025 Alternative Learning System - Bukidnon Cluster I. All rights reserved.
