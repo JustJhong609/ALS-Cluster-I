@@ -10,7 +10,6 @@ import {
   BarChart3,
   BookOpen,
   Download,
-  Lock,
 } from "lucide-react";
 import {
   fadeInUp,
@@ -18,8 +17,7 @@ import {
   staggerItem,
   cardHover,
 } from "@/utils/animations";
-import { useAuth } from "@/contexts/AuthContext";
-import { cn } from "@/utils/helpers";
+
 
 // Forms data
 const FORMS = [
@@ -93,34 +91,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
   indigo: { bg: "bg-indigo-100", text: "text-indigo-600", border: "hover:border-indigo-400" },
 };
 
-// Protected Download Button Component
-function ProtectedDownloadButton({ 
-  href, 
-  children, 
-  className = "" 
-}: { 
-  href: string; 
-  children: React.ReactNode; 
-  className?: string;
-}) {
-  const { requireLogin, auth } = useAuth();
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    requireLogin(href);
-  };
-
-  return (
-    <motion.button
-      onClick={handleClick}
-      whileHover={{ x: 5 }}
-      className={cn("inline-flex items-center gap-2", className)}
-    >
-      {!auth.isLoggedIn && <Lock className="w-3 h-3" />}
-      {children}
-    </motion.button>
-  );
-}
 
 export function Forms() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -188,13 +159,16 @@ export function Forms() {
                   </p>
 
                   {/* Download Link */}
-                  <ProtectedDownloadButton
+                  <motion.a
                     href={form.downloadLink}
-                    className={`font-semibold ${colors.text} hover:underline`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 5 }}
+                    className={`inline-flex items-center gap-2 font-semibold ${colors.text} hover:underline`}
                   >
                     Download
                     <Download className="w-4 h-4" />
-                  </ProtectedDownloadButton>
+                  </motion.a>
                 </motion.div>
               </motion.div>
             );

@@ -23,7 +23,7 @@ export const SITE_CONFIG = {
   heroTitle: "Alternative Learning System",
   heroSubtitle: "BUKIDNON CLUSTER I",
   heroDescription:
-    "Bringing quality and flexible education to learners in Bukidnon.",
+    "Bringing quality and flexible education to out-of-school youth and adults across Manolo Fortich, Libona, Baungon, and Malitbog — empowering learners through the A&E Test pathway and lifelong learning.",
   videoUrl: "https://www.youtube.com/embed/2-ZgNsubzcs",
   videoTitle: "The Untold Story of ALS Teachers",
   videoDescription:

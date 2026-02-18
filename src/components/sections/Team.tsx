@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Mail, User, X, MapPin, Briefcase, Award, ChevronDown, ChevronUp, Users } from "lucide-react";
+import { Mail, User, X, MapPin, Briefcase, Award, ChevronDown, ChevronUp, Users, Search } from "lucide-react";
 import { TEAM_MEMBERS, MUNICIPALITIES } from "@/constants";
 import { cn } from "@/utils/helpers";
 import {
@@ -185,6 +185,7 @@ function TeamMemberModal({
 
 export function Team() {
   const [activeTab, setActiveTab] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -193,11 +194,14 @@ export function Team() {
   // Number of members to show when collapsed
   const INITIAL_DISPLAY_COUNT = 8;
 
-  // Filter team members by municipality
-  const filteredMembers =
-    activeTab === "All"
-      ? TEAM_MEMBERS
-      : TEAM_MEMBERS.filter((member) => member.district === activeTab);
+  // Filter team members by municipality and search query
+  const filteredMembers = TEAM_MEMBERS.filter((member) => {
+    const matchesTab = activeTab === "All" || member.district === activeTab;
+    const matchesSearch = searchQuery === "" ||
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.role.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
 
   // Members to display based on expanded state
   const displayedMembers = isExpanded 
@@ -207,10 +211,10 @@ export function Team() {
   const hasMoreMembers = filteredMembers.length > INITIAL_DISPLAY_COUNT;
   const hiddenCount = filteredMembers.length - INITIAL_DISPLAY_COUNT;
 
-  // Reset expanded state when tab changes
+  // Reset expanded state when tab or search changes
   useEffect(() => {
     setIsExpanded(false);
-  }, [activeTab]);
+  }, [activeTab, searchQuery]);
 
   return (
     <section
@@ -238,26 +242,41 @@ export function Team() {
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
+        {/* Search + Filter */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-10"
+          className="flex flex-col items-center gap-4 mb-10"
         >
-          {MUNICIPALITIES.map((municipality) => (
-            <button
-              key={municipality}
-              onClick={() => setActiveTab(municipality)}
-              className={cn(
-                "tab",
-                activeTab === municipality && "tab-active"
-              )}
-            >
-              {municipality}
-            </button>
-          ))}
+          {/* Search Bar */}
+          <div className="relative w-full max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Search by name or role…"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="input pl-10 text-sm"
+            />
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {MUNICIPALITIES.map((municipality) => (
+              <button
+                key={municipality}
+                onClick={() => setActiveTab(municipality)}
+                className={cn(
+                  "tab",
+                  activeTab === municipality && "tab-active"
+                )}
+              >
+                {municipality}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Team Grid */}
