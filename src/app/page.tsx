@@ -9,6 +9,7 @@ import { Forms } from "@/components/sections/Forms";
 import { Passers } from "@/components/sections/Passers";
 import { Contact } from "@/components/sections/Contact";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { Stats } from "@/components/sections/Stats";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
+        <Stats />
         <VideoIntro />
         <About />
         <Team />
